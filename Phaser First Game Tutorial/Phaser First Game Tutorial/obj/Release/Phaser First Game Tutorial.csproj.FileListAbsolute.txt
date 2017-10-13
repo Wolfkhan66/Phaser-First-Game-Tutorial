@@ -1,53 +1,5 @@
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\Microsoft.CodeAnalysis.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.IO.Compression.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\VBCSCompiler.exe
 D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\WebGrease.dll
 D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\ApplicationInsights.config
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\csc.exe
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\csc.exe.config
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\csc.rsp
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\csi.exe
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\csi.exe.config
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\csi.rsp
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\Microsoft.CSharp.Core.targets
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\Microsoft.VisualBasic.Core.targets
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\Microsoft.Win32.Primitives.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.AppContext.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Collections.Immutable.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Console.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Diagnostics.Process.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Diagnostics.StackTrace.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.IO.FileSystem.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.IO.FileSystem.DriveInfo.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.IO.FileSystem.Primitives.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.IO.Pipes.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Reflection.Metadata.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Security.AccessControl.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Security.Claims.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Security.Cryptography.Algorithms.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Security.Cryptography.Encoding.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Security.Cryptography.Primitives.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Security.Principal.Windows.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Text.Encoding.CodePages.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Threading.Thread.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.ValueTuple.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Xml.ReaderWriter.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Xml.XmlDocument.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Xml.XPath.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\System.Xml.XPath.XDocument.dll
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\vbc.exe
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\vbc.exe.config
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\vbc.rsp
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\roslyn\VBCSCompiler.exe.config
 D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\Phaser First Game Tutorial.dll.config
 D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\Phaser First Game Tutorial.dll
 D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\Phaser First Game Tutorial.pdb
@@ -87,3 +39,4 @@ D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Gam
 D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\obj\Release\Phaser First Game Tutorial.csproj.CoreCompileInputs.cache
 D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\obj\Release\Phaser First Game Tutorial.dll
 D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\obj\Release\Phaser First Game Tutorial.pdb
+D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\obj\Release\Phaser First Game Tutorial.csprojResolveAssemblyReference.cache
