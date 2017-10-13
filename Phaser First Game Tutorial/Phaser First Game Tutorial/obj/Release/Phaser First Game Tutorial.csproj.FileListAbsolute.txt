@@ -39,4 +39,3 @@ D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Gam
 D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\obj\Release\Phaser First Game Tutorial.csproj.CoreCompileInputs.cache
 D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\obj\Release\Phaser First Game Tutorial.dll
 D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\obj\Release\Phaser First Game Tutorial.pdb
-D:\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\obj\Release\Phaser First Game Tutorial.csprojResolveAssemblyReference.cache
