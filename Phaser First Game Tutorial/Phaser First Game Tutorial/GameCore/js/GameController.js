@@ -25,10 +25,14 @@ function preload() {
 
 function create() {
     console.log("create();");
+    game.world.setBounds(0, 0, 1920, 1080);
     //Instantiate The GameWorld and system classes
     gameWorld = new GameWorld();
     ui = new UI();
     audio = new Audio();
+
+    game.camera.follow(gameWorld.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
+
     CreatePlatforms();
     CreateCollectibles();
     console.log("create complete.");
@@ -45,17 +49,23 @@ function HandleCollisions() {
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.stars.group, CollectStar);
 }
 
-function CreatePlatforms()
-{
-    gameWorld.platforms.createPlatform(0, game.world.height - 64, 2, 2);
-    gameWorld.platforms.createPlatform(400, 400, 1, 1);
-    gameWorld.platforms.createPlatform(-150, 250, 1, 1);
+function CreatePlatforms() {
+    gameWorld.platforms.createPlatform(0, 1080 - 64, 6, 2);
+
+    for (var i = 0; i < 50; i++) {
+        const x = game.rnd.integerInRange(100, 1920);
+        const y = game.rnd.integerInRange(100, 1080);
+        gameWorld.platforms.createPlatform(x, y, 0.5, 0.5);
+    }
+
 }
 
 function CreateCollectibles() {
-    for (var i = 0; i < 12; i++) {
+    for (var i = 0; i < 50; i++) {
+        const x = game.rnd.integerInRange(100, 1920);
+        const y = game.rnd.integerInRange(100, 1080);
         //  Create a star inside of the 'stars' group
-        gameWorld.stars.createStar(i * 70, 0, 1, 1, 'star');
+        gameWorld.stars.createStar(x, y, 1, 1);
     }
 }
 

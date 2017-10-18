@@ -3,10 +3,12 @@
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         this.background = game.add.sprite(0, 0, 'background');
+        this.background.height = 1080;
+        this.background.width = 1920;
         this.player = new Player();
 
-        this.platforms = new CollidableGroup(3, 'platform', PlatformFactory);
-        this.stars = new CollidableGroup(12, 'star', StarFactory);
+        this.platforms = new CollidableGroup(51, 'platform', PlatformFactory);
+        this.stars = new CollidableGroup(50, 'star', StarFactory);
         console.log("GameWorld Instantiated.");
     }
 
