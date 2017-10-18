@@ -15,17 +15,18 @@ class CollidableGroup {
     constructor(size, spriteName, initCallback) {
         const group = game.add.group();
         group.enableBody = true;
-        group.physicsBodyType = Phaser.Physics.ARCADE;
         group.createMultiple(size, spriteName);
         group.forEach(initCallback);
 
         this.group = group;
     }
 
-    createPlatform(x, y) {
-        const sprite = this.group.getFirstExists(false);
-        if (sprite) {
-            sprite.reset(x, y);
+    createPlatform(x, y, scaleX, scaleY, sprite) {
+        const platform = this.group.getFirstExists(false);
+        if (platform) {
+            platform.reset(x, y);
+            platform.scale.setTo(scaleX, scaleY);
+            platform.body.immovable = true;
         }
     }
 

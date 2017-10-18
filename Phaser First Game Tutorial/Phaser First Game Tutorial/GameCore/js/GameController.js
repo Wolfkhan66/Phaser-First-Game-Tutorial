@@ -10,47 +10,39 @@
         create: create,
         update: update
     });
-    game.score = 0;
 }
 
 function preload() {
     console.log("preload();");
-
     // Load game assets
     game.load.image('platform', '../GameCore/Assets/platform.png');
     game.load.image('background', '../GameCore/Assets/background.png');
     game.load.spritesheet('player', '../GameCore/Assets/player.png', 32, 48);
-
     console.log("preload complete.");
 }
 
 function create() {
     console.log("create();");
-
     //Instantiate The GameWorld and system classes
     gameWorld = new GameWorld();
-    input = new Input();
     ui = new UI();
     audio = new Audio();
-
-    //Arrow Keys
-    input.add(Phaser.Keyboard.LEFT, function () { gameWorld.player.MoveLeft(); });
-    input.add(Phaser.Keyboard.RIGHT, function () { gameWorld.player.MoveRight(); });
-    input.add(Phaser.Keyboard.SPACEBAR, function () { gameWorld.player.Jump(); });
-    input.add(Phaser.Keyboard.UP, function () { gameWorld.player.Jump(); });
-
-    createPlatforms();
-
+    CreatePlatforms();
     console.log("create complete.");
 }
 
 function update() {
+    HandleCollisions();
     gameWorld.update();
 }
 
-function createPlatforms() {
-    console.log("Creating Platforms");
-    gameWorld.createPlatform(0, game.world.height - 64);
-    gameWorld.createPlatform(400, 400);
-    gameWorld.createPlatform(-150, 250);
+function HandleCollisions() {
+    game.physics.arcade.collide(gameWorld.player.sprite, gameWorld.platforms.group);
+}
+
+function CreatePlatforms()
+{
+    gameWorld.platforms.createPlatform(0, game.world.height - 64, 2, 2, 'platform');
+    gameWorld.platforms.createPlatform(400, 400, 1, 1, 'platform');
+    gameWorld.platforms.createPlatform(-150, 250, 1, 1, 'platform');
 }
