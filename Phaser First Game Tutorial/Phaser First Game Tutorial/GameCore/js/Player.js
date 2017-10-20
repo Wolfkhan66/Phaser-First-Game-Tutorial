@@ -4,6 +4,7 @@
         console.log("Player Instantiated.")
         const playerSprite = game.add.sprite(game.width / 2, game.height / 2, 'player');
         game.physics.arcade.enable(playerSprite);
+        playerSprite.anchor.setTo(0.5, 0.5);
         playerSprite.body.gravity.y = 400;
         playerSprite.body.collideWorldBounds = true;
 

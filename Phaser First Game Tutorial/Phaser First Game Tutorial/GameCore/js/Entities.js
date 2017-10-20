@@ -35,6 +35,18 @@ class CollidableGroup {
         }
     }
 
+    createEnemy(x, y, scaleX, scaleY) {
+        console.log("Creating enemy");
+        const enemy = this.group.getFirstExists(false);
+        if (enemy) {
+            enemy.reset(x, y);
+            enemy.scale.setTo(scaleX, scaleY);
+            enemy.body.gravity.y = 500;
+            enemy.health = 10;
+            enemy.attack = 2;
+        }
+    }
+
     updateGroup() {
         this.group.forEachExists(function (sprite) {
             sprite.entity.update();
