@@ -50,6 +50,7 @@ function HandleCollisions() {
     game.physics.arcade.collide(gameWorld.stars.group, gameWorld.platforms.group);
     game.physics.arcade.collide(gameWorld.enemies.group, gameWorld.platforms.group);
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.stars.group, CollectStar);
+    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.enemies.group, HitPlayer);
 }
 
 function CreatePlatforms() {
@@ -73,12 +74,12 @@ function CreateCollectibles() {
 }
 
 function CreateEnemies() {
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < 3; i++) {
         const x = game.rnd.integerInRange(100, 1920);
         const y = game.rnd.integerInRange(100, 1080);
         //  Create a star inside of the 'stars' group
-        //gameWorld.enemies.createEnemy(x, y, 1, 1);
-        gameWorld.enemies.createEnemy(gameWorld.player.sprite.body.x + 50, gameWorld.player.sprite.body.y + 50, 1, 1);
+        gameWorld.enemies.createEnemy(x, y, 1, 1);
+        //gameWorld.enemies.createEnemy(gameWorld.player.sprite.body.x + 50, gameWorld.player.sprite.body.y + 50, 1, 1);
     }
 }
 
@@ -88,3 +89,9 @@ function CollectStar(player, star) {
     ui.setScore(game.score);
 }
 
+function HitPlayer(player, enemy) {
+    if (enemy.attacking == true && enemy.cooldown == false) {
+        player.health = (player.health - enemy.damage)
+        ui.setPlayerHealth(player.health);
+    }
+}
