@@ -93,5 +93,6 @@ function HitPlayer(player, enemy) {
     if (enemy.attacking == true && enemy.cooldown == false) {
         player.health = (player.health - enemy.damage)
         ui.setPlayerHealth(player.health);
+        enemy.cooldown = true;
     }
 }

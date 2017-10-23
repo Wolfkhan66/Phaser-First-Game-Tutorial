@@ -54,7 +54,6 @@ function EnemyFactory(sprite) {
         }
         else if (sprite.attacking == true && sprite.timer.seconds > 0.5){
             sprite.body.velocity.x = 0;
-            sprite.cooldown = true;
         }
         else if (sprite.attacking == false) {
             if (gameWorld.player.sprite.x > sprite.x) {
