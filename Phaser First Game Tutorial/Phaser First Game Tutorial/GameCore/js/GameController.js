@@ -26,14 +26,17 @@ function preload() {
 
 function create() {
     console.log("create();");
+    // set the bounds of the game world to 1920x1080 so the world is larger than the canvas
     game.world.setBounds(0, 0, 1920, 1080);
     //Instantiate The GameWorld and system classes
     gameWorld = new GameWorld();
     ui = new UI();
     audio = new Audio();
 
+    // set the build in camera to follow the player sprite and set it to platformer mode
     game.camera.follow(gameWorld.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
 
+    // Call asset create methods
     CreatePlatforms();
     CreateCollectibles();
     CreateEnemies();
@@ -46,14 +49,18 @@ function update() {
 }
 
 function HandleCollisions() {
+    // These collisions make the sprites collide with one another so they may not overlap
     game.physics.arcade.collide(gameWorld.player.sprite, gameWorld.platforms.group);
     game.physics.arcade.collide(gameWorld.stars.group, gameWorld.platforms.group);
     game.physics.arcade.collide(gameWorld.enemies.group, gameWorld.platforms.group);
+
+    // These collisions detect if sprites have overlapped and passes those sprites to a method to further handle the outcome
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.stars.group, CollectStar);
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.enemies.group, HitPlayer);
 }
 
 function CreatePlatforms() {
+    // Create the floor of the world
     gameWorld.platforms.createPlatform(0, 1080 - 64, 6, 2);
 
     //for (var i = 0; i < 50; i++) {
@@ -90,7 +97,11 @@ function CollectStar(player, star) {
 }
 
 function HitPlayer(player, enemy) {
+    // if the enemy is attacking and is not yet on cooldown
     if (enemy.attacking == true && enemy.cooldown == false) {
+        // remove the enemies damage value from the players health
+        // reset the player health text in the ui
+        // set the enemy to be on cooldown to stop the enemy damaging the player 60 times per second while attack is true.
         player.health = (player.health - enemy.damage)
         ui.setPlayerHealth(player.health);
         enemy.cooldown = true;
