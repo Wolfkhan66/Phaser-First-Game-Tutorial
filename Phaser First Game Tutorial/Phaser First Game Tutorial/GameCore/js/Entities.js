@@ -1,9 +1,22 @@
 ﻿class Entity {
-    update() { }
+    constructor() {
+        this.controls = [];
+    }
 
-    destroy() { }
+    addControl(control) {
+        this.controls.push(control);
+    }
 
-    control() { }
+    removeControl(control) {
+        var index = this.controls.indexOf(control);
+        this.controls.splice(index, 1);
+    }
+
+    update(sprite) {
+        this.controls.forEach(function (callback) {
+            callback(sprite);
+        });
+    }
 }
 
 class CollidableGroup {
@@ -60,7 +73,7 @@ class CollidableGroup {
     updateGroup() {
         // For any sprites in this group in use, call their entity update function
         this.group.forEachExists(function (sprite) {
-            sprite.entity.update();
+            sprite.entity.update(sprite);
         })
     }
 

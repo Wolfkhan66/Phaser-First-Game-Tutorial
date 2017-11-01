@@ -160,6 +160,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="GameCore\js\Controls.js" />
     <Content Include="GameCore\js\Entities.js" />
     <Content Include="GameCore\js\GameWorld.js" />
     <Content Include="GameCore\js\System.js" />

@@ -72,20 +72,20 @@ function CreatePlatforms() {
 }
 
 function CreateCollectibles() {
-    //for (var i = 0; i < 50; i++) {
-    //    const x = game.rnd.integerInRange(100, 1920);
-    //    const y = game.rnd.integerInRange(100, 1080);
-    //    //  Create a star inside of the 'stars' group
-    //    gameWorld.stars.createStar(x, y, 1, 1);
-    //}
-}
-
-function CreateEnemies() {
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 5; i++) {
         const x = game.rnd.integerInRange(100, 1920);
         const y = game.rnd.integerInRange(100, 1080);
         //  Create a star inside of the 'stars' group
-        gameWorld.enemies.createEnemy(x, y, 1, 1);
+        gameWorld.stars.createStar(x, y, 1, 1);
+    }
+}
+
+function CreateEnemies() {
+    for (var i = 0; i < 1; i++) {
+        const x = game.rnd.integerInRange(100, 1920);
+        const y = game.rnd.integerInRange(100, 1080);
+        //  Create a star inside of the 'stars' group
+        gameWorld.enemies.createEnemy(50, 50, 1, 1);
         //gameWorld.enemies.createEnemy(gameWorld.player.sprite.body.x + 50, gameWorld.player.sprite.body.y + 50, 1, 1);
     }
 }
@@ -97,13 +97,15 @@ function CollectStar(player, star) {
 }
 
 function HitPlayer(player, enemy) {
-    // if the enemy is attacking and is not yet on cooldown
-    if (enemy.attacking == true && enemy.cooldown == false) {
+    
+    // if the enemy is attacking
+    if (enemy.attacking) {
         // remove the enemies damage value from the players health
         // reset the player health text in the ui
-        // set the enemy to be on cooldown to stop the enemy damaging the player 60 times per second while attack is true.
+        // set attacking to false to stop the enemy damaging the player 60 times per second.
         player.health = (player.health - enemy.damage)
         ui.setPlayerHealth(player.health);
-        enemy.cooldown = true;
+        enemy.attacking = false;
+        console.log("Collision with player detected")
     }
 }
