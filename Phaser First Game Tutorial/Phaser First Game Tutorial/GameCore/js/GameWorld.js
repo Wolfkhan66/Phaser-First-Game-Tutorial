@@ -3,14 +3,11 @@
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         this.background = game.add.sprite(0, 0, 'background');
-        // resize test background to fill the world bounds
-        this.background.height = 1080;
-        this.background.width = 1920;
         this.player = new Player();
 
         this.platforms = new CollidableGroup(1, 'platform', PlatformFactory);
         this.stars = new CollidableGroup(5, 'star', StarFactory);
-        this.enemies = new CollidableGroup(5, 'enemy', EnemyFactory);
+        this.enemies = new CollidableGroup(500, 'enemy', EnemyFactory);
         console.log("GameWorld Instantiated.");
     }
 

@@ -18,6 +18,16 @@
                 // fix the text to the game camera and set the x and y relative to the camera
         this.playerHealth.fixedToCamera = true;
         this.playerHealth.cameraOffset.setTo(10, 60);
+
+        this.newGameText = game.add.text(0, 0, 'New Game', {
+            font: '34px Arial',
+            fill: '#fff'
+        });
+
+        this.newGameText.fixedToCamera = true;
+        this.newGameText.cameraOffset.setTo(game.width / 2, game.height / 2);
+        this.newGameText.inputEnabled = true;
+        this.newGameText.events.onInputDown.add(function () { return SceneManager("Map1") }, this);
     }
 
     setScore(score) {
@@ -26,6 +36,12 @@
 
     setPlayerHealth(health) {
         this.playerHealth.text = 'Health: ' + health;
+    }
+
+    hideAll() {
+        this.scoreText.visible = false;
+        this.playerHealth.visible = false;
+        this.newGameText.visible = false;
     }
 }
 

@@ -17,9 +17,10 @@ function preload() {
     console.log("preload();");
     // Load game assets
     game.load.spritesheet('enemy', '../GameCore/Assets/baddie.png', 32, 32);
+    game.load.image('background', '../GameCore/Assets/background.png');
     game.load.image('platform', '../GameCore/Assets/platform.png');
     game.load.image('star', '../GameCore/Assets/star.png');
-    game.load.image('background', '../GameCore/Assets/background.png');
+    game.load.image('SplashScreen', '../GameCore/Assets/SplashScreen.png');
     game.load.spritesheet('player', '../GameCore/Assets/player.png', 32, 48);
     console.log("preload complete.");
 }
@@ -27,7 +28,7 @@ function preload() {
 function create() {
     console.log("create();");
     // set the bounds of the game world to 1920x1080 so the world is larger than the canvas
-    game.world.setBounds(0, 0, 1920, 1080);
+    game.world.setBounds(0, 0, 800, 600);
     //Instantiate The GameWorld and system classes
     gameWorld = new GameWorld();
     ui = new UI();
@@ -36,17 +37,80 @@ function create() {
     // set the build in camera to follow the player sprite and set it to platformer mode
     game.camera.follow(gameWorld.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
 
-    // Call asset create methods
-    CreatePlatforms();
-    CreateCollectibles();
-    CreateEnemies();
+    SceneManager("Menu");
     console.log("create complete.");
 }
 
 function update() {
     HandleCollisions();
     gameWorld.update();
+    WaveManager(game.currentMap, game.currentWave);
 }
+
+function SceneManager(scene) {
+    ui.hideAll();
+    gameWorld.cleanup();
+    switch (scene) {
+        case "Menu": {
+            gameWorld.background.loadTexture('SplashScreen');
+            ui.newGameText.visible = true;
+            gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
+            break;
+        }
+        case "Map1": {
+            gameWorld.background.loadTexture('background');
+            gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
+            ui.scoreText.visible = true;
+            ui.playerHealth.visible = true;
+            game.enemiesAlive = 0;
+            game.currentWave = 0;
+            game.currentMap = "Map1";
+            game.waveActive = false;
+            break;
+        }
+        case "Map2": {
+            break;
+        }
+    }
+}
+
+function WaveManager(Map, Wave) {
+    switch (Map) {
+        case "Map1": {
+            switch (Wave) {
+                case 0: {
+                    game.time.events.add(Phaser.Timer.SECOND * 5, function () { game.currentWave++; }, this);
+                    break;
+                }
+                case 1: {
+                    if (game.waveActive == false) {
+                        gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
+
+                        for (var i = 0; i < 5; i++) {
+                            const x = game.rnd.integerInRange(0, 800);
+                            const y = game.rnd.integerInRange(0, 500);
+                            gameWorld.stars.createStar(x, y, 1, 1);
+                        }
+
+                        for (var i = 0; i < 1; i++) {
+                            const x = game.rnd.integerInRange(0, 800);
+                            const y = game.rnd.integerInRange(0, 600);
+                            gameWorld.enemies.createEnemy(50, 50, 1, 1);
+                            game.enemiesAlive++;
+                            //gameWorld.enemies.createEnemy(gameWorld.player.sprite.body.x + 50, gameWorld.player.sprite.body.y + 50, 1, 1);
+                        }
+                        game.waveActive = true;
+                    } else {
+                        if (game.enemiesAlive == 0) { game.waveAction = false; game.currentWave++; }
+                    }
+                    break;
+                }
+            }
+            break;
+        }
+    }
+}
+
 
 function HandleCollisions() {
     // These collisions make the sprites collide with one another so they may not overlap
@@ -59,37 +123,6 @@ function HandleCollisions() {
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.enemies.group, HitPlayer);
 }
 
-function CreatePlatforms() {
-    // Create the floor of the world
-    gameWorld.platforms.createPlatform(0, 1080 - 64, 6, 2);
-
-    //for (var i = 0; i < 50; i++) {
-    //    const x = game.rnd.integerInRange(100, 1920);
-    //    const y = game.rnd.integerInRange(100, 1080);
-    //    gameWorld.platforms.createPlatform(x, y, 0.5, 0.5);
-    //}
-
-}
-
-function CreateCollectibles() {
-    for (var i = 0; i < 5; i++) {
-        const x = game.rnd.integerInRange(100, 1920);
-        const y = game.rnd.integerInRange(100, 1080);
-        //  Create a star inside of the 'stars' group
-        gameWorld.stars.createStar(x, y, 1, 1);
-    }
-}
-
-function CreateEnemies() {
-    for (var i = 0; i < 1; i++) {
-        const x = game.rnd.integerInRange(100, 1920);
-        const y = game.rnd.integerInRange(100, 1080);
-        //  Create a star inside of the 'stars' group
-        gameWorld.enemies.createEnemy(50, 50, 1, 1);
-        //gameWorld.enemies.createEnemy(gameWorld.player.sprite.body.x + 50, gameWorld.player.sprite.body.y + 50, 1, 1);
-    }
-}
-
 function CollectStar(player, star) {
     star.kill();
     game.score += 10;
@@ -97,7 +130,7 @@ function CollectStar(player, star) {
 }
 
 function HitPlayer(player, enemy) {
-    
+
     // if the enemy is attacking
     if (enemy.attacking) {
         // remove the enemies damage value from the players health

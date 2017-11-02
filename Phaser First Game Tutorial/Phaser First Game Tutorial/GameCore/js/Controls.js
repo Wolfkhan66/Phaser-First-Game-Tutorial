@@ -6,7 +6,7 @@ function TestControl(sprite) {
 function FollowPlayer(sprite) {
     // If the sprite isn't attacking
     if (sprite.following) {
-        console.log("Following player")
+        console.log("Following player");
         // if the player sprite x coordinate is higher than this sprites x coordinate
         if (gameWorld.player.sprite.x > sprite.x) {
             // Stop sprite action timer and raise x velocity to move to the right
@@ -49,7 +49,7 @@ function JumpAttackControl(sprite) {
 
     // if the sprite is on cooldown
     if (sprite.cooldown) {
-        console.log("Cooling down")
+        console.log("Cooling down");
         // if the sprite is moving left or right, slowly bring the x velocity to 0
         if (sprite.body.velocity.x > 0) {
             sprite.body.velocity.x -= 3;
@@ -66,7 +66,7 @@ function JumpAttackControl(sprite) {
 
     // if sprite is in range and is not attacking or on cooldown
     if (sprite.inRange && !sprite.chargingAttack && !sprite.attacking && !sprite.cooldown) {
-        console.log("In range")
+        console.log("In range");
         // stop animations and set x velocity to 0 to appear paused
         // start the action timer and set chargingAttack to true
         sprite.animations.stop();
@@ -77,7 +77,7 @@ function JumpAttackControl(sprite) {
 
     // if the sprite is in range and the sprite is charging an attack
     if (sprite.inRange && sprite.chargingAttack) {
-        console.log("Charging attack")
+        console.log("Charging attack");
         // after 1.5 seconds, jump towards the player and stop the action time.
         // set attacking to true and cooldown to true and restart the action timer for the cooldown
         if (sprite.timer.seconds > 1.5) {

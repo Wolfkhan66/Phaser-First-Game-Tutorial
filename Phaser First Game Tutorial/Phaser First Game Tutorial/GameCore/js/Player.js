@@ -10,6 +10,8 @@
         playerSprite.animations.add('left', [0, 1, 2, 3], 10, true);
         playerSprite.animations.add('right', [5, 6, 7, 8], 10, true);
         playerSprite.health = 100;
+        playerSprite.attacking = false;
+        playerSprite.timer = game.time.create(false);
 
         this.sprite = playerSprite;
     }
