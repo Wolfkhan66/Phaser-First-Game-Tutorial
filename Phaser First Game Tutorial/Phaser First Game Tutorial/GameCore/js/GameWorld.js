@@ -7,7 +7,7 @@
 
         this.platforms = new CollidableGroup(1, 'platform', PlatformFactory);
         this.stars = new CollidableGroup(5, 'star', StarFactory);
-        this.enemies = new CollidableGroup(500, 'enemy', EnemyFactory);
+        this.enemies = new CollidableGroup(10, 'enemy', EnemyFactory);
         console.log("GameWorld Instantiated.");
     }
 
@@ -20,6 +20,7 @@
     cleanup() {
         this.platforms.destroyGroup();
         this.stars.destroyGroup();
+        this.enemies.destroyGroup();
     }
 }
 
@@ -28,27 +29,11 @@ function PlatformFactory(sprite) {
 }
 
 function StarFactory(sprite) {
-    sprite.following = true;
-    sprite.speed = 50;
     sprite.entity = new Entity();
     sprite.entity.addControl(FollowPlayer);
 }
 
 function EnemyFactory(sprite) {
-    sprite.anchor.setTo(0.5, 0.5);
-    sprite.animations.add('right', [2, 3], 10, true);
-    sprite.animations.add('left', [0, 1], 10, true);
-
-    sprite.timer = game.time.create(false);
-    sprite.range = 40;
-    sprite.speed = 50;
-    sprite.damage = 5;
-    sprite.attacking = false;
-    sprite.cooldown = false;
-    sprite.inRange = false;
-    sprite.chargingAttack = false;
-    sprite.following = true;
-
     sprite.entity = new Entity();
     sprite.entity.addControl(FollowPlayer);
     sprite.entity.addControl(JumpAttackControl);

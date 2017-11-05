@@ -151,6 +151,8 @@
   <ItemGroup>
     <Content Include="GameCore\Assets\baddie.png" />
     <Content Include="GameCore\Assets\diamond.png" />
+    <Content Include="GameCore\Assets\HUD\HealthBar.png" />
+    <Content Include="GameCore\Assets\HUD\HUD.png" />
     <Content Include="GameCore\Assets\player.png" />
     <Content Include="GameCore\Assets\firstaid.png" />
     <Content Include="GameCore\Assets\platform.png" />
@@ -174,6 +176,7 @@
     </Content>
     <Content Include="GameCore\js\GameController.js" />
     <Content Include="GameCore\js\Player.js" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />

@@ -2,7 +2,7 @@
 
     constructor() {
         console.log("Player Instantiated.")
-        const playerSprite = game.add.sprite(game.width / 2, game.height / 2, 'player');
+        const playerSprite = game.add.sprite(0,0, 'player');
         game.physics.arcade.enable(playerSprite);
         playerSprite.anchor.setTo(0.5, 0.5);
         playerSprite.body.gravity.y = 400;
@@ -14,6 +14,16 @@
         playerSprite.timer = game.time.create(false);
 
         this.sprite = playerSprite;
+    }
+
+    SetPlayerPosition(x, y) {
+        this.sprite.x = x;
+        this.sprite.y = y;
+    }
+
+    ResetPlayer() {
+        this.sprite.health = 100;
+        ui.setPlayerHealth(this.sprite.health);
     }
 
     HandleInput() {
@@ -33,6 +43,10 @@
         if (cursors.up.isDown && this.sprite.body.touching.down) {
             this.Jump();
         }
+    }
+
+    Death() {
+        SceneManager("GameOver");
     }
 
     MoveLeft() {

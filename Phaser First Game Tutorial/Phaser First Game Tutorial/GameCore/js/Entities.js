@@ -50,9 +50,12 @@ class CollidableGroup {
             // reset the x and y of the sprite and set the scale
             star.reset(x, y);
             star.scale.setTo(scaleX, scaleY);
+            star.anchor.setTo(0.5, 0.5);
             //give the sprite some gravity and a random bounce value
             star.body.gravity.y = 300;
             star.body.bounce.y = 0.7 + Math.random() * 0.2;
+            star.following = true;
+            star.speed = 50;
         }
     }
 
@@ -67,6 +70,19 @@ class CollidableGroup {
             // give the sprite some gravity and a health value
             enemy.body.gravity.y = 500;
             enemy.health = 10;
+            enemy.anchor.setTo(0.5, 0.5);
+            enemy.animations.add('right', [2, 3], 10, true);
+            enemy.animations.add('left', [0, 1], 10, true);
+
+            enemy.timer = game.time.create(false);
+            enemy.range = 40;
+            enemy.speed = 50;
+            enemy.damage = 5;
+            enemy.attacking = false;
+            enemy.cooldown = false;
+            enemy.inRange = false;
+            enemy.chargingAttack = false;
+            enemy.following = true;
         }
     }
 

@@ -21,11 +21,13 @@ function preload() {
     game.load.image('platform', '../GameCore/Assets/platform.png');
     game.load.image('star', '../GameCore/Assets/star.png');
     game.load.image('SplashScreen', '../GameCore/Assets/SplashScreen.png');
+    game.load.image('HUD', '../GameCore/Assets/HUD/HUD.png');
     game.load.spritesheet('player', '../GameCore/Assets/player.png', 32, 48);
     console.log("preload complete.");
 }
 
 function create() {
+    game.ActionTimer = game.time.create(false);
     console.log("create();");
     // set the bounds of the game world to 1920x1080 so the world is larger than the canvas
     game.world.setBounds(0, 0, 800, 600);
@@ -42,9 +44,16 @@ function create() {
 }
 
 function update() {
+    //game.debug.geom(ui.playerHealthBar, '#00ff00');
     HandleCollisions();
     gameWorld.update();
     WaveManager(game.currentMap, game.currentWave);
+}
+
+function resetGame() {
+    gameWorld.player.ResetPlayer();
+    game.score = 0;
+    ui.setScore(game.score);
 }
 
 function SceneManager(scene) {
@@ -52,16 +61,24 @@ function SceneManager(scene) {
     gameWorld.cleanup();
     switch (scene) {
         case "Menu": {
+            resetGame();
+            ui.MainMenuUI.visible = true;
+            gameWorld.player.SetPlayerPosition(game.width / 2, game.height / 2);
             gameWorld.background.loadTexture('SplashScreen');
-            ui.newGameText.visible = true;
+            gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
+            break;
+        }
+        case "GameOver": {
+            ui.GameOverUI.visible = true;
+            gameWorld.background.loadTexture('GameOverScreen');
             gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
             break;
         }
         case "Map1": {
+            ui.InGameUI.visible = true;
+            gameWorld.player.SetPlayerPosition(game.width / 2, game.height / 2);
             gameWorld.background.loadTexture('background');
             gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
-            ui.scoreText.visible = true;
-            ui.playerHealth.visible = true;
             game.enemiesAlive = 0;
             game.currentWave = 0;
             game.currentMap = "Map1";
@@ -69,6 +86,7 @@ function SceneManager(scene) {
             break;
         }
         case "Map2": {
+            gameWorld = new GameWorld();
             break;
         }
     }
@@ -79,7 +97,13 @@ function WaveManager(Map, Wave) {
         case "Map1": {
             switch (Wave) {
                 case 0: {
-                    game.time.events.add(Phaser.Timer.SECOND * 5, function () { game.currentWave++; }, this);
+                    game.ActionTimer.start();
+                    console.log(game.ActionTimer.seconds);
+                    if (game.ActionTimer.seconds > 5) {
+                        game.ActionTimer.stop();
+                        game.currentWave++;
+                        ui.setWaveCounter(game.currentWave);
+                    }
                     break;
                 }
                 case 1: {
@@ -92,16 +116,19 @@ function WaveManager(Map, Wave) {
                             gameWorld.stars.createStar(x, y, 1, 1);
                         }
 
-                        for (var i = 0; i < 1; i++) {
-                            const x = game.rnd.integerInRange(0, 800);
-                            const y = game.rnd.integerInRange(0, 600);
-                            gameWorld.enemies.createEnemy(50, 50, 1, 1);
+                        for (var i = 0; i < 10; i++) {
+                            const x = game.rnd.integerInRange(20, 780);
+                            const y = game.rnd.integerInRange(20, 500);
+                            gameWorld.enemies.createEnemy(x, y, 1, 1);
                             game.enemiesAlive++;
-                            //gameWorld.enemies.createEnemy(gameWorld.player.sprite.body.x + 50, gameWorld.player.sprite.body.y + 50, 1, 1);
                         }
                         game.waveActive = true;
                     } else {
-                        if (game.enemiesAlive == 0) { game.waveAction = false; game.currentWave++; }
+                        if (game.enemiesAlive == 0) {
+                            game.waveActive = false;
+                            game.currentWave++;
+                            ui.setWaveCounter(game.currentWave);
+                        }
                     }
                     break;
                 }
@@ -140,5 +167,9 @@ function HitPlayer(player, enemy) {
         ui.setPlayerHealth(player.health);
         enemy.attacking = false;
         console.log("Collision with player detected")
+    }
+
+    if (player.health <= 0) {
+        gameWorld.player.Death();
     }
 }
