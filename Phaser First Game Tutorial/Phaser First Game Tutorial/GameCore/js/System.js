@@ -24,9 +24,7 @@
         this.HUD = game.add.sprite(0, 0, 'HUD');
         // create the healh bar rectangle to go behind the HUD element
         this.healthBarRectangle = game.make.graphics();
-        this.healthBarRectangle.beginFill(0x00ff00, 1);
-        this.healthBarRectangle.drawRect(24, 10, gameWorld.player.sprite.health, 11);
-        this.healthBarRectangle.endFill();
+        this.drawHealthBarRectangle();
 
         // Add elements to the ui group in the order they should be rendered
         this.InGameUI.add(this.healthBarRectangle);
@@ -68,7 +66,14 @@
     }
 
     setPlayerHealth(health) {
-        this.healthBarRectangle.width = health;
+        this.healthBarRectangle.clear();
+        this.drawHealthBarRectangle();
+    }
+
+    drawHealthBarRectangle() {
+        this.healthBarRectangle.beginFill(0x00ff00, 1);
+        this.healthBarRectangle.drawRect(24, 10, gameWorld.player.sprite.health, 11);
+        this.healthBarRectangle.endFill();
     }
 
     setWaveCounter(wave) {

@@ -16,17 +16,19 @@
 function preload() {
     console.log("preload();");
     // Load game assets
-    game.load.spritesheet('enemy', '../GameCore/Assets/baddie.png', 32, 32);
-    game.load.image('background', '../GameCore/Assets/background.png');
+    game.load.spritesheet('enemy', '../GameCore/Assets/Enemies/baddie.png', 32, 32);
+    game.load.image('background', '../GameCore/Assets/Screens/background.png');
+    game.load.image('SplashScreen', '../GameCore/Assets/Screens/SplashScreen.png');
     game.load.image('platform', '../GameCore/Assets/platform.png');
-    game.load.image('star', '../GameCore/Assets/star.png');
-    game.load.image('SplashScreen', '../GameCore/Assets/SplashScreen.png');
+    game.load.image('star', '../GameCore/Assets/Collectibles/star.png');
     game.load.image('HUD', '../GameCore/Assets/HUD/HUD.png');
-    game.load.spritesheet('player', '../GameCore/Assets/player.png', 32, 48);
+    game.load.spritesheet('player', '../GameCore/Assets/Player/player.png', 32, 48);
+
     console.log("preload complete.");
 }
 
 function create() {
+
     game.ActionTimer = game.time.create(false);
     console.log("create();");
     // set the bounds of the game world to 1920x1080 so the world is larger than the canvas
@@ -39,7 +41,13 @@ function create() {
     // set the build in camera to follow the player sprite and set it to platformer mode
     game.camera.follow(gameWorld.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
 
+
     SceneManager("Menu");
+    //ui.hideAll();
+    //gameWorld.background.visible = false;
+
+
+
     console.log("create complete.");
 }
 
@@ -116,7 +124,7 @@ function WaveManager(Map, Wave) {
                             gameWorld.stars.createStar(x, y, 1, 1);
                         }
 
-                        for (var i = 0; i < 10; i++) {
+                        for (var i = 0; i < 1; i++) {
                             const x = game.rnd.integerInRange(20, 780);
                             const y = game.rnd.integerInRange(20, 500);
                             gameWorld.enemies.createEnemy(x, y, 1, 1);
