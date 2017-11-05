@@ -22,15 +22,15 @@ function preload() {
     game.load.image('platform', '../GameCore/Assets/platform.png');
     game.load.image('star', '../GameCore/Assets/Collectibles/star.png');
     game.load.image('HUD', '../GameCore/Assets/HUD/HUD.png');
+    game.load.image('HealthBar', '../GameCore/Assets/HUD/HealthBarLine.png');
     game.load.spritesheet('player', '../GameCore/Assets/Player/player.png', 32, 48);
 
     console.log("preload complete.");
 }
 
 function create() {
-
-    game.ActionTimer = game.time.create(false);
     console.log("create();");
+    game.ActionTimer = game.time.create(false);
     // set the bounds of the game world to 1920x1080 so the world is larger than the canvas
     game.world.setBounds(0, 0, 800, 600);
     //Instantiate The GameWorld and system classes
@@ -39,20 +39,13 @@ function create() {
     audio = new Audio();
 
     // set the build in camera to follow the player sprite and set it to platformer mode
-    game.camera.follow(gameWorld.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
-
+    // game.camera.follow(gameWorld.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
 
     SceneManager("Menu");
-    //ui.hideAll();
-    //gameWorld.background.visible = false;
-
-
-
     console.log("create complete.");
 }
 
 function update() {
-    //game.debug.geom(ui.playerHealthBar, '#00ff00');
     HandleCollisions();
     gameWorld.update();
     WaveManager(game.currentMap, game.currentWave);
@@ -61,7 +54,7 @@ function update() {
 function resetGame() {
     gameWorld.player.ResetPlayer();
     game.score = 0;
-    ui.setScore(game.score);
+    ui.setText("Score", "Score: " + game.score);
 }
 
 function SceneManager(scene) {
@@ -70,20 +63,20 @@ function SceneManager(scene) {
     switch (scene) {
         case "Menu": {
             resetGame();
-            ui.MainMenuUI.visible = true;
-            gameWorld.player.SetPlayerPosition(game.width / 2, game.height / 2);
-            gameWorld.background.loadTexture('SplashScreen');
-            gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
+            ui.showUI("MainMenuUI");
+            break;
+        }
+        case "MapSelect": {
+            ui.showUI("MapSelectUI");
             break;
         }
         case "GameOver": {
-            ui.GameOverUI.visible = true;
-            gameWorld.background.loadTexture('GameOverScreen');
-            gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
+            ui.showUI("GameOverUI");
             break;
         }
         case "Map1": {
-            ui.InGameUI.visible = true;
+            ui.showUI("InGameUI");
+            gameWorld.player.sprite.visible = true;
             gameWorld.player.SetPlayerPosition(game.width / 2, game.height / 2);
             gameWorld.background.loadTexture('background');
             gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
@@ -94,11 +87,20 @@ function SceneManager(scene) {
             break;
         }
         case "Map2": {
-            gameWorld = new GameWorld();
+            ui.showUI("InGameUI");
+            gameWorld.player.sprite.visible = true;
+            gameWorld.player.SetPlayerPosition(game.width / 2, game.height / 2);
+            gameWorld.background.loadTexture('background');
+            gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
+            game.enemiesAlive = 0;
+            game.currentWave = 0;
+            game.currentMap = "Map2";
+            game.waveActive = false;
             break;
         }
     }
 }
+
 
 function WaveManager(Map, Wave) {
     switch (Map) {
@@ -110,7 +112,7 @@ function WaveManager(Map, Wave) {
                     if (game.ActionTimer.seconds > 5) {
                         game.ActionTimer.stop();
                         game.currentWave++;
-                        ui.setWaveCounter(game.currentWave);
+                        ui.setText("WaveCounter" , "Wave: " + game.currentWave);
                     }
                     break;
                 }
@@ -140,6 +142,48 @@ function WaveManager(Map, Wave) {
                     }
                     break;
                 }
+                  
+            }
+            break;
+        } case "Map2": {
+            switch (Wave) {
+                case 0: {
+                    game.ActionTimer.start();
+                    console.log(game.ActionTimer.seconds);
+                    if (game.ActionTimer.seconds > 5) {
+                        game.ActionTimer.stop();
+                        game.currentWave++;
+                        ui.setText("WaveCounter", "Wave: " + game.currentWave);
+                    }
+                    break;
+                }
+                case 1: {
+                    if (game.waveActive == false) {
+                        gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
+
+                        for (var i = 0; i < 1; i++) {
+                            const x = game.rnd.integerInRange(0, 800);
+                            const y = game.rnd.integerInRange(0, 500);
+                            gameWorld.stars.createStar(x, y, 1, 1);
+                        }
+
+                        for (var i = 0; i < 5; i++) {
+                            const x = game.rnd.integerInRange(20, 780);
+                            const y = game.rnd.integerInRange(20, 500);
+                            gameWorld.enemies.createEnemy(x, y, 1, 1);
+                            game.enemiesAlive++;
+                        }
+                        game.waveActive = true;
+                    } else {
+                        if (game.enemiesAlive == 0) {
+                            game.waveActive = false;
+                            game.currentWave++;
+                            ui.setWaveCounter(game.currentWave);
+                        }
+                    }
+                    break;
+                }
+
             }
             break;
         }
@@ -161,7 +205,7 @@ function HandleCollisions() {
 function CollectStar(player, star) {
     star.kill();
     game.score += 10;
-    ui.setScore(game.score);
+    ui.setText("Score", "Score: " + game.score);
 }
 
 function HitPlayer(player, enemy) {

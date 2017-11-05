@@ -12,6 +12,7 @@
         playerSprite.health = 100;
         playerSprite.attacking = false;
         playerSprite.timer = game.time.create(false);
+        playerSprite.visible = false;
 
         this.sprite = playerSprite;
     }
@@ -22,6 +23,7 @@
     }
 
     ResetPlayer() {
+        this.sprite.visible = false;
         this.sprite.health = 100;
         ui.setPlayerHealth(this.sprite.health);
     }

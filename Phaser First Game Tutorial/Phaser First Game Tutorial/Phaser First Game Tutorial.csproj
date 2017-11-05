@@ -152,6 +152,7 @@
     <Content Include="GameCore\Assets\Enemies\baddie.png" />
     <Content Include="GameCore\Assets\Collectibles\diamond.png" />
     <Content Include="GameCore\Assets\HUD\HealthBar.png" />
+    <Content Include="GameCore\Assets\HUD\HealthBarLine.png" />
     <Content Include="GameCore\Assets\HUD\HUD.png" />
     <Content Include="GameCore\Assets\Player\player.png" />
     <Content Include="GameCore\Assets\Collectibles\firstaid.png" />
