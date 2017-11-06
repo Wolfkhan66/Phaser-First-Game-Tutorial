@@ -24,6 +24,7 @@ class CollidableGroup {
         const group = game.add.group();
         // enable physics body on sprite
         group.enableBody = true;
+
         // create multiple sprites in the group to be reused
         group.createMultiple(size, spriteName);
         group.forEach(initCallback);
@@ -64,19 +65,22 @@ class CollidableGroup {
         // get the first sprite in the group that is not in use
         const enemy = this.group.getFirstExists(false);
         if (enemy) {
+            enemy.body.collideWorldBounds = true;
             enemy.reset(x, y);
             enemy.scale.setTo(scaleX, scaleY);
             enemy.body.gravity.y = 500;
             enemy.anchor.setTo(0.5, 0.5);
             enemy.animations.add('right', [2, 3], 10, true);
             enemy.animations.add('left', [0, 1], 10, true);
-
+            enemy.body.bounce.y = 0.3;
             enemy.timer = game.time.create(false);
             enemy.health = 10;
             enemy.range = game.rnd.integerInRange(20, 80);
             enemy.speed = game.rnd.integerInRange(30, 100);
             enemy.damage = game.rnd.integerInRange(4, 6);
-            enemy.reactionTime = (game.rnd.integerInRange(5, 20) / 10);
+            enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
+            enemy.facingLeft = false;
+            enemy.facingRight = false;
             enemy.attacking = false;
             enemy.cooldown = false;
             enemy.inRange = false;

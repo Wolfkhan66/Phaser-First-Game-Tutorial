@@ -21,6 +21,7 @@ function preload() {
     // Load game assets
     game.load.spritesheet('enemy', '../GameCore/Assets/Enemies/baddie.png', 32, 32);
     game.load.image('background', '../GameCore/Assets/Screens/background.png');
+    game.load.image('Map1Background', '../GameCore/Assets/Screens/Map1Background.jpg');
     game.load.image('SplashScreen', '../GameCore/Assets/Screens/SplashScreen.png');
     game.load.image('platform', '../GameCore/Assets/platform.png');
     game.load.image('star', '../GameCore/Assets/Collectibles/star.png');
@@ -87,9 +88,9 @@ function SceneManager(scene) {
         case "Map1": {
             resetGame();
             ui.showUI("InGameUI");
+            gameWorld.background.loadTexture('Map1Background');
             gameWorld.player.sprite.visible = true;
             gameWorld.player.SetPlayerPosition(game.width / 2, game.height / 2);
-            gameWorld.background.loadTexture('background');
             gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
             game.currentMap = "Map1";
             break;
@@ -97,16 +98,15 @@ function SceneManager(scene) {
         case "Map2": {
             resetGame();
             ui.showUI("InGameUI");
+            gameWorld.background.loadTexture('background');
             gameWorld.player.sprite.visible = true;
             gameWorld.player.SetPlayerPosition(game.width / 2, game.height / 2);
-            gameWorld.background.loadTexture('background');
             gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
             game.currentMap = "Map2";
             break;
         }
     }
 }
-
 
 function WaveManager() {
     if (game.enemiesAlive == 0 && !game.waveActive) {
@@ -160,15 +160,17 @@ function CollectStar(player, star) {
 }
 
 function EnemyPlayerCollision(player, enemy) {
-
-    // if the enemy is attacking
     if (enemy.attacking) {
-        // remove the enemies damage value from the players health
-        // reset the player health text in the ui
-        // set attacking to false to stop the enemy damaging the player 60 times per second.
-        player.health = (player.health - enemy.damage)
+        player.health -= enemy.damage
         ui.setPlayerHealth(player.health);
+        // set attacking to false to stop the enemy damaging the player 60 times per second.
         enemy.attacking = false;
+        if (enemy.facingLeft) {
+            player.body.velocity.x = -500;
+        }
+        if (enemy.facingRight) {
+            player.body.velocity.x = 500;
+        }
     }
 
     if (player.health <= 0) {
@@ -176,6 +178,18 @@ function EnemyPlayerCollision(player, enemy) {
     }
 
     if (player.attacking) {
+        enemy.health -= player.damage;
+        player.attacking = false;
+        player.cooldown = true;
+        if (player.facingLeft) {
+            enemy.body.velocity.x = -500;
+        }
+        if (player.facingRight) {
+            enemy.body.velocity.x = 500;
+        }
+    }
+
+    if (enemy.health <= 0) {
         game.score += 10;
         ui.setText("Score", "Score: " + game.score);
         enemy.kill();

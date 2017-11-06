@@ -12,11 +12,15 @@ function FollowPlayer(sprite) {
             // Stop sprite action timer and raise x velocity to move to the right
             sprite.body.velocity.x = sprite.speed;
             sprite.animations.play('right');
+            sprite.facingLeft = false;
+            sprite.facingRight = true;
         }
         else {
             // Stop sprite action timer and lower x velocity to move to the left
             sprite.body.velocity.x = -sprite.speed;
             sprite.animations.play('left');
+            sprite.facingLeft = true;
+            sprite.facingRight = false;
         }
     }
 }
@@ -76,7 +80,7 @@ function JumpAttackControl(sprite) {
     }
 
     // if the sprite is in range and the sprite is charging an attack
-    if (sprite.inRange && sprite.chargingAttack) {
+    if (sprite.chargingAttack) {
         //console.log("Charging attack");
         // after reaction time, jump towards the player and stop the action timer.
         // set attacking to true and cooldown to true and restart the action timer for the cooldown

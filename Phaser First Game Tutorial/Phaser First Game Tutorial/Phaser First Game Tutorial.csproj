@@ -158,6 +158,7 @@
     <Content Include="GameCore\Assets\Collectibles\firstaid.png" />
     <Content Include="GameCore\Assets\platform.png" />
     <Content Include="GameCore\Assets\Screens\background.png" />
+    <Content Include="GameCore\Assets\Screens\Map1Background.jpg" />
     <Content Include="GameCore\Assets\Screens\SplashScreen.png" />
     <Content Include="GameCore\Assets\Collectibles\star.png" />
     <Content Include="Content\bootstrap.css" />
