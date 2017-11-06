@@ -111,15 +111,20 @@ function SceneManager(scene) {
 function WaveManager() {
     if (game.enemiesAlive == 0 && !game.waveActive) {
         game.ActionTimer.start();
-        if (game.ActionTimer.seconds > 5) {
-            game.ActionTimer.stop();
+        if (game.ActionTimer.seconds > 7) {
+            ui.setText("WaveHelperText", "Here They Come!");
+        }
+        if (game.ActionTimer.seconds > 12) {
             game.currentWave++;
             game.difficulty = (game.currentWave * 5) * game.difficultyLevel;
             ui.setText("WaveCounter", "Wave: " + game.currentWave);
+            ui.setText("WaveHelperText", " ");
             game.waveActive = true;
+            game.ActionTimer.stop();
         }
     }
     else if (game.waveActive) {
+        ui.setText("EnemyCounter", "Enemies: " + (game.difficulty + game.enemiesAlive));
         if (game.difficulty > 0) {
             if (game.enemiesAlive < 6) {
                 const x = game.rnd.integerInRange(20, 780);
@@ -131,6 +136,7 @@ function WaveManager() {
         }
         else if (game.enemiesAlive == 0) {
             game.waveActive = false;
+            ui.setText("WaveHelperText", "Prepare Yourself!");
         }
     }
 }

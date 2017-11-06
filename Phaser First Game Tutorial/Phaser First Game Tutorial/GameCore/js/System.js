@@ -8,6 +8,8 @@
         this.createSprite('HealthBar', 'InGameUI', 24, 10, 100, 11, 'HealthBar');
         this.createSprite('HUD', 'InGameUI', 0, 0, 800, 600, 'HUD');
         this.createText('WaveCounter', 'InGameUI', 335, 8, 'Wave: 0', 35, null);
+        this.createText('EnemyCounter', 'InGameUI', 355, 50, 'Enemies: ', 20, null);
+        this.createText('WaveHelperText', 'InGameUI', 270, (game.height / 2) - 100, 'Prepare Yourself!', 40, null);
         this.createText('Score', 'InGameUI', 660, 2, 'Score: 0', 20, null);
 
         // MainMenuUI \\
