@@ -57,8 +57,8 @@ function JumpAttackControl(sprite) {
         else if (sprite.body.velocity.x < 0){
             sprite.body.velocity.x += 3;
         }
-        // the action timer reaches 2 seconds, set cooldown to false and stop the action timer
-        if (sprite.timer.seconds > 2) {
+        // if the action timer reaches reactionTime, set cooldown to false and stop the action timer
+        if (sprite.timer.seconds > sprite.reactionTime) {
             sprite.cooldown = false;
             sprite.timer.stop();
         }
@@ -78,9 +78,9 @@ function JumpAttackControl(sprite) {
     // if the sprite is in range and the sprite is charging an attack
     if (sprite.inRange && sprite.chargingAttack) {
         //console.log("Charging attack");
-        // after 1.5 seconds, jump towards the player and stop the action time.
+        // after reaction time, jump towards the player and stop the action timer.
         // set attacking to true and cooldown to true and restart the action timer for the cooldown
-        if (sprite.timer.seconds > 1.5) {
+        if (sprite.timer.seconds > sprite.reactionTime) {
             sprite.body.velocity.y = -80;
             if (gameWorld.player.sprite.x > sprite.x) {
                 sprite.body.velocity.x = +200;

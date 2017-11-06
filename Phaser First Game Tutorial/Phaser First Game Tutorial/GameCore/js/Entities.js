@@ -64,20 +64,19 @@ class CollidableGroup {
         // get the first sprite in the group that is not in use
         const enemy = this.group.getFirstExists(false);
         if (enemy) {
-            // reset the x and y of the sprite and set the scale
             enemy.reset(x, y);
             enemy.scale.setTo(scaleX, scaleY);
-            // give the sprite some gravity and a health value
             enemy.body.gravity.y = 500;
-            enemy.health = 10;
             enemy.anchor.setTo(0.5, 0.5);
             enemy.animations.add('right', [2, 3], 10, true);
             enemy.animations.add('left', [0, 1], 10, true);
 
             enemy.timer = game.time.create(false);
-            enemy.range = 40;
-            enemy.speed = 50;
-            enemy.damage = 5;
+            enemy.health = 10;
+            enemy.range = game.rnd.integerInRange(20, 80);
+            enemy.speed = game.rnd.integerInRange(30, 100);
+            enemy.damage = game.rnd.integerInRange(4, 6);
+            enemy.reactionTime = (game.rnd.integerInRange(5, 20) / 10);
             enemy.attacking = false;
             enemy.cooldown = false;
             enemy.inRange = false;

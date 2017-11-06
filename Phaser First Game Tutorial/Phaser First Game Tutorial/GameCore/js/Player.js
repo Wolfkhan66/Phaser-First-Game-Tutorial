@@ -2,7 +2,7 @@
 
     constructor() {
         console.log("Player Instantiated.")
-        const playerSprite = game.add.sprite(0,0, 'player');
+        const playerSprite = game.add.sprite(0, 0, 'player');
         game.physics.arcade.enable(playerSprite);
         playerSprite.anchor.setTo(0.5, 0.5);
         playerSprite.body.gravity.y = 400;
@@ -11,6 +11,8 @@
         playerSprite.animations.add('right', [5, 6, 7, 8], 10, true);
         playerSprite.health = 100;
         playerSprite.attacking = false;
+        playerSprite.FacingLeft = false;
+        playerSprite.FacingRight = false;
         playerSprite.timer = game.time.create(false);
         playerSprite.visible = false;
 
@@ -42,6 +44,10 @@
             this.StopMoving();
         }
 
+        if (cursors.down.isDown && this.sprite.body.touching.down) {
+            this.Attack();
+        }
+
         if (cursors.up.isDown && this.sprite.body.touching.down) {
             this.Jump();
         }
@@ -52,15 +58,34 @@
     }
 
     MoveLeft() {
+        this.sprite.attacking = false;
         console.log("Moving Left <--")
         this.sprite.body.velocity.x = -150;
         this.sprite.animations.play('left');
+        this.sprite.movingRight = false;
+        this.sprite.movingLeft = true;
     }
 
     MoveRight() {
+        this.sprite.attacking = false;
         console.log("Moving Right -->")
         this.sprite.body.velocity.x = 150;
         this.sprite.animations.play('right');
+        this.sprite.movingRight = true;
+        this.sprite.movingLeft = false;
+    }
+
+    Attack() {
+        console.log("Test Attack");
+        this.sprite.attacking = true;
+        if (this.sprite.movingLeft) {
+            this.sprite.body.velocity.x = -2000;
+            this.sprite.body.velocity.y = -50;
+        }
+        else if (this.sprite.movingRight) {
+            this.sprite.body.velocity.x = 2000;
+            this.sprite.body.velocity.y = -50;
+        }
     }
 
     Jump() {

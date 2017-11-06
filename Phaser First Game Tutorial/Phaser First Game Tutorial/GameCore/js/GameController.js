@@ -11,6 +11,9 @@
         update: update
     });
     game.score = 0;
+    game.currentWave = 0;
+    game.enemiesAlive = 0;
+    game.waveActive = false;
 }
 
 function preload() {
@@ -48,13 +51,16 @@ function create() {
 function update() {
     HandleCollisions();
     gameWorld.update();
-    WaveManager(game.currentMap, game.currentWave);
+    WaveManager();
 }
 
 function resetGame() {
     gameWorld.player.ResetPlayer();
     game.score = 0;
     ui.setText("Score", "Score: " + game.score);
+    game.currentWave = 0;
+    game.enemiesAlive = 0;
+    game.waveActive = false;
 }
 
 function SceneManager(scene) {
@@ -70,122 +76,61 @@ function SceneManager(scene) {
             ui.showUI("MapSelectUI");
             break;
         }
+        case "DifficultySelect": {
+            ui.showUI("DifficultySelectUI");
+            break;
+        }
         case "GameOver": {
             ui.showUI("GameOverUI");
             break;
         }
         case "Map1": {
+            resetGame();
             ui.showUI("InGameUI");
             gameWorld.player.sprite.visible = true;
             gameWorld.player.SetPlayerPosition(game.width / 2, game.height / 2);
             gameWorld.background.loadTexture('background');
             gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
-            game.enemiesAlive = 0;
-            game.currentWave = 0;
             game.currentMap = "Map1";
-            game.waveActive = false;
             break;
         }
         case "Map2": {
+            resetGame();
             ui.showUI("InGameUI");
             gameWorld.player.sprite.visible = true;
             gameWorld.player.SetPlayerPosition(game.width / 2, game.height / 2);
             gameWorld.background.loadTexture('background');
             gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
-            game.enemiesAlive = 0;
-            game.currentWave = 0;
             game.currentMap = "Map2";
-            game.waveActive = false;
             break;
         }
     }
 }
 
 
-function WaveManager(Map, Wave) {
-    switch (Map) {
-        case "Map1": {
-            switch (Wave) {
-                case 0: {
-                    game.ActionTimer.start();
-                    console.log(game.ActionTimer.seconds);
-                    if (game.ActionTimer.seconds > 5) {
-                        game.ActionTimer.stop();
-                        game.currentWave++;
-                        ui.setText("WaveCounter" , "Wave: " + game.currentWave);
-                    }
-                    break;
-                }
-                case 1: {
-                    if (game.waveActive == false) {
-                        gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
-
-                        for (var i = 0; i < 5; i++) {
-                            const x = game.rnd.integerInRange(0, 800);
-                            const y = game.rnd.integerInRange(0, 500);
-                            gameWorld.stars.createStar(x, y, 1, 1);
-                        }
-
-                        for (var i = 0; i < 1; i++) {
-                            const x = game.rnd.integerInRange(20, 780);
-                            const y = game.rnd.integerInRange(20, 500);
-                            gameWorld.enemies.createEnemy(x, y, 1, 1);
-                            game.enemiesAlive++;
-                        }
-                        game.waveActive = true;
-                    } else {
-                        if (game.enemiesAlive == 0) {
-                            game.waveActive = false;
-                            game.currentWave++;
-                            ui.setWaveCounter(game.currentWave);
-                        }
-                    }
-                    break;
-                }
-                  
+function WaveManager() {
+    if (game.enemiesAlive == 0 && !game.waveActive) {
+        game.ActionTimer.start();
+        if (game.ActionTimer.seconds > 5) {
+            game.ActionTimer.stop();
+            game.currentWave++;
+            game.difficulty = (game.currentWave * 5) * game.difficultyLevel;
+            ui.setText("WaveCounter", "Wave: " + game.currentWave);
+            game.waveActive = true;
+        }
+    }
+    else if (game.waveActive) {
+        if (game.difficulty > 0) {
+            if (game.enemiesAlive < 6) {
+                const x = game.rnd.integerInRange(20, 780);
+                const y = game.rnd.integerInRange(20, 500);
+                gameWorld.enemies.createEnemy(x, y, 1, 1);
+                game.enemiesAlive++;
+                game.difficulty--;
             }
-            break;
-        } case "Map2": {
-            switch (Wave) {
-                case 0: {
-                    game.ActionTimer.start();
-                    console.log(game.ActionTimer.seconds);
-                    if (game.ActionTimer.seconds > 5) {
-                        game.ActionTimer.stop();
-                        game.currentWave++;
-                        ui.setText("WaveCounter", "Wave: " + game.currentWave);
-                    }
-                    break;
-                }
-                case 1: {
-                    if (game.waveActive == false) {
-                        gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
-
-                        for (var i = 0; i < 1; i++) {
-                            const x = game.rnd.integerInRange(0, 800);
-                            const y = game.rnd.integerInRange(0, 500);
-                            gameWorld.stars.createStar(x, y, 1, 1);
-                        }
-
-                        for (var i = 0; i < 5; i++) {
-                            const x = game.rnd.integerInRange(20, 780);
-                            const y = game.rnd.integerInRange(20, 500);
-                            gameWorld.enemies.createEnemy(x, y, 1, 1);
-                            game.enemiesAlive++;
-                        }
-                        game.waveActive = true;
-                    } else {
-                        if (game.enemiesAlive == 0) {
-                            game.waveActive = false;
-                            game.currentWave++;
-                            ui.setWaveCounter(game.currentWave);
-                        }
-                    }
-                    break;
-                }
-
-            }
-            break;
+        }
+        else if (game.enemiesAlive == 0) {
+            game.waveActive = false;
         }
     }
 }
@@ -199,7 +144,7 @@ function HandleCollisions() {
 
     // These collisions detect if sprites have overlapped and passes those sprites to a method to further handle the outcome
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.stars.group, CollectStar);
-    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.enemies.group, HitPlayer);
+    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.enemies.group, EnemyPlayerCollision);
 }
 
 function CollectStar(player, star) {
@@ -208,7 +153,7 @@ function CollectStar(player, star) {
     ui.setText("Score", "Score: " + game.score);
 }
 
-function HitPlayer(player, enemy) {
+function EnemyPlayerCollision(player, enemy) {
 
     // if the enemy is attacking
     if (enemy.attacking) {
@@ -218,10 +163,16 @@ function HitPlayer(player, enemy) {
         player.health = (player.health - enemy.damage)
         ui.setPlayerHealth(player.health);
         enemy.attacking = false;
-        console.log("Collision with player detected")
     }
 
     if (player.health <= 0) {
         gameWorld.player.Death();
+    }
+
+    if (player.attacking) {
+        game.score += 10;
+        ui.setText("Score", "Score: " + game.score);
+        enemy.kill();
+        game.enemiesAlive--;
     }
 }

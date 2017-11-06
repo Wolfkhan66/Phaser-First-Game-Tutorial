@@ -4,21 +4,26 @@
         this.TextObjects = [];
         this.Sprites = [];
 
-        // IN GAME UI \\
+        // InGameUI \\
         this.createSprite('HealthBar', 'InGameUI', 24, 10, 100, 11, 'HealthBar');
         this.createSprite('HUD', 'InGameUI', 0, 0, 800, 600, 'HUD');
         this.createText('WaveCounter', 'InGameUI', 335, 8, 'Wave: 0', 35, null);
         this.createText('Score', 'InGameUI', 660, 2, 'Score: 0', 20, null);
 
-        // MAIN MENU UI \\
+        // MainMenuUI \\
         this.createSprite('SplashScreen', 'MainMenuUI', 0, 0, 800, 600, 'SplashScreen');
-        this.createText('StartGameText', 'MainMenuUI', (game.width / 2) - 34, (game.height / 2) - 34, 'Click to Start', 25, function () { return SceneManager("MapSelect") });
+        this.createText('StartGameText', 'MainMenuUI', (game.width / 2) - 34, (game.height / 2) - 34, 'Click to Start', 25, function () { return SceneManager("DifficultySelect") });
+
+        // DifficultySelectUI \\
+        this.createText('Easy', 'DifficultySelectUI', (game.width / 3.5), (game.height / 2), 'Easy', 25, function () { game.difficultyLevel = 1; return SceneManager("MapSelect"); });
+        this.createText('Normal', 'DifficultySelectUI', (game.width / 3.5), (game.height / 2) + 30, 'Normal', 25, function () { game.difficultyLevel = 2; return SceneManager("MapSelect"); });
+        this.createText('Hard', 'DifficultySelectUI', (game.width / 3.5), (game.height / 2) + 60, 'Hard', 25, function () { game.difficultyLevel = 3; return SceneManager("MapSelect"); });
 
         // MapSelectUI \\
         this.createText('Map1', 'MapSelectUI', (game.width / 3.5), (game.height / 2), 'Map 1', 25, function () { return SceneManager("Map1") });
         this.createText('Map2', 'MapSelectUI', (game.width / 3.5), (game.height / 2) + 30, 'Map 2', 25, function () { return SceneManager("Map2") });
 
-        // GAME OVER UI \\
+        // GameOverUI \\
         this.createText('GameOver', 'GameOverUI', (game.width / 3.5), (game.height / 2) - 68, 'Game Over', 25, function () { return SceneManager("Menu") });
     }
 
@@ -32,7 +37,6 @@
             Text.events.onInputDown.add(event, this);
         }
         this.TextObjects.push({ Name: Name, UI: UI, Text: Text });
-        console.log(this.TextObjects);
     }
 
     createSprite(Name, UI, x, y, width, height, image) {
