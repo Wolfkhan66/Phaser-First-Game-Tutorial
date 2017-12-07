@@ -13,7 +13,7 @@
         playerSprite.animations.add('attack1', ['attack1.png', 'attack2.png'], 4, false);
         playerSprite.animations.add('attack2', ['attack3.png', 'attack4.png'], 4, false);
         playerSprite.animations.add('attack3', ['attack5.png', 'attack6.png', 'attack7.png', 'attack8.png'], 5, false);
-        playerSprite.animations.add('damaged', ['damaged.png'], 8, false);
+        playerSprite.animations.add('damaged', ['damaged.png'], 5, false);
         playerSprite.health = 100;
         playerSprite.damage = 2;
 
@@ -87,7 +87,7 @@
             this.sprite.animations.play('damaged');
             this.sprite.animations.currentAnim.onComplete.add(function () { this.sprite.takingDamage = false; }, this);
             if (this.sprite.health <= 0) {
-                death();
+                this.death();
             }
         }
     }
