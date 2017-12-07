@@ -27,7 +27,7 @@ function preload() {
     game.load.image('star', '../GameCore/Assets/Collectibles/star.png');
     game.load.image('HUD', '../GameCore/Assets/HUD/HUD.png');
     game.load.image('HealthBar', '../GameCore/Assets/HUD/HealthBarLine.png');
-    game.load.spritesheet('player', '../GameCore/Assets/Player/player.png', 32, 48);
+    game.load.atlasJSONHash('player', '../GameCore/Assets/Player/player.png', '../GameCore/Assets/Player/player.json');
 
     console.log("preload complete.");
 }
@@ -162,26 +162,13 @@ function collectStar(player, star) {
 
 function enemyPlayerCollision(player, enemy) {
     if (enemy.attacking) {
-        player.health -= enemy.damage
-        ui.setPlayerHealth(player.health);
+        gameWorld.player.takeDamage(enemy.damage);
         // set attacking to false to stop the enemy damaging the player 60 times per second.
         enemy.attacking = false;
-        if (enemy.facingLeft) {
-            player.body.velocity.x = -500;
-        }
-        if (enemy.facingRight) {
-            player.body.velocity.x = 500;
-        }
-    }
-
-    if (player.health <= 0) {
-        gameWorld.player.death();
     }
 
     if (player.attacking) {
         enemy.health -= player.damage;
-        player.attacking = false;
-        player.cooldown = true;
         if (player.facingLeft) {
             enemy.body.velocity.x = -500;
         }

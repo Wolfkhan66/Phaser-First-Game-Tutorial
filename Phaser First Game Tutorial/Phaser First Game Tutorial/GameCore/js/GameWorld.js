@@ -11,7 +11,7 @@
     }
 
     update() {
-        this.player.handleInput();
+        this.player.update();
         this.enemies.updateGroup();
         this.stars.updateGroup();
     }

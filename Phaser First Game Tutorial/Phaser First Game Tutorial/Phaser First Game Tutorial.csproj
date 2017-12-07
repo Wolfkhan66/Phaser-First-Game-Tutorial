@@ -178,6 +178,7 @@
     </Content>
     <Content Include="GameCore\js\GameController.js" />
     <Content Include="GameCore\js\Player.js" />
+    <Content Include="GameCore\Assets\Player\player.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
