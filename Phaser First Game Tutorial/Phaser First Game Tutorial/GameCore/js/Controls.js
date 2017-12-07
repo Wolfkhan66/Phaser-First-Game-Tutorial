@@ -1,9 +1,9 @@
 ﻿
-function TestControl(sprite) {
+function testControl(sprite) {
     console.log("Test Control running...");
 }
 
-function FollowPlayer(sprite) {
+function followPlayerControl(sprite) {
     // If the sprite isn't attacking
     if (sprite.following) {
         //console.log("Following player");
@@ -25,7 +25,7 @@ function FollowPlayer(sprite) {
     }
 }
 
-function JumpAttackControl(sprite) {
+function jumpAttackControl(sprite) {
     // if sprite is not in range to attack and is not on cooldown, reset the attack booleans and stop the action timer.
     if (!sprite.inRange && !sprite.cooldown) { sprite.attacking = false; sprite.chargingAttack = false; sprite.timer.stop(); }
     // if the player is to the right

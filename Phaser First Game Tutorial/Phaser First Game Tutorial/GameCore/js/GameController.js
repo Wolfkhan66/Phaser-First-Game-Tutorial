@@ -34,7 +34,7 @@ function preload() {
 
 function create() {
     console.log("create();");
-    game.ActionTimer = game.time.create(false);
+    game.actionTimer = game.time.create(false);
     // set the bounds of the game world to 1920x1080 so the world is larger than the canvas
     game.world.setBounds(0, 0, 800, 600);
     //Instantiate The GameWorld and system classes
@@ -45,18 +45,18 @@ function create() {
     // set the build in camera to follow the player sprite and set it to platformer mode
     // game.camera.follow(gameWorld.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
 
-    SceneManager("Menu");
+    sceneManager("Menu");
     console.log("create complete.");
 }
 
 function update() {
-    HandleCollisions();
+    handleCollisions();
     gameWorld.update();
-    WaveManager();
+    waveManager();
 }
 
 function resetGame() {
-    gameWorld.player.ResetPlayer();
+    gameWorld.player.resetPlayer();
     game.score = 0;
     ui.setText("Score", "Score: " + game.score);
     game.currentWave = 0;
@@ -64,8 +64,9 @@ function resetGame() {
     game.waveActive = false;
 }
 
-function SceneManager(scene) {
+function sceneManager(scene) {
     ui.hideAll();
+    gameWorld.player.sprite.visible = false;
     gameWorld.cleanup();
     switch (scene) {
         case "Menu": {
@@ -90,7 +91,7 @@ function SceneManager(scene) {
             ui.showUI("InGameUI");
             gameWorld.background.loadTexture('Map1Background');
             gameWorld.player.sprite.visible = true;
-            gameWorld.player.SetPlayerPosition(game.width / 2, game.height / 2);
+            gameWorld.player.setPlayerPosition(game.width / 2, game.height / 2);
             gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
             game.currentMap = "Map1";
             break;
@@ -100,7 +101,7 @@ function SceneManager(scene) {
             ui.showUI("InGameUI");
             gameWorld.background.loadTexture('background');
             gameWorld.player.sprite.visible = true;
-            gameWorld.player.SetPlayerPosition(game.width / 2, game.height / 2);
+            gameWorld.player.setPlayerPosition(game.width / 2, game.height / 2);
             gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
             game.currentMap = "Map2";
             break;
@@ -108,19 +109,19 @@ function SceneManager(scene) {
     }
 }
 
-function WaveManager() {
+function waveManager() {
     if (game.enemiesAlive == 0 && !game.waveActive) {
-        game.ActionTimer.start();
-        if (game.ActionTimer.seconds > 7) {
+        game.actionTimer.start();
+        if (game.actionTimer.seconds > 7) {
             ui.setText("WaveHelperText", "Here They Come!");
         }
-        if (game.ActionTimer.seconds > 12) {
+        if (game.actionTimer.seconds > 12) {
             game.currentWave++;
             game.difficulty = (game.currentWave * 5) * game.difficultyLevel;
             ui.setText("WaveCounter", "Wave: " + game.currentWave);
             ui.setText("WaveHelperText", " ");
             game.waveActive = true;
-            game.ActionTimer.stop();
+            game.actionTimer.stop();
         }
     }
     else if (game.waveActive) {
@@ -142,24 +143,24 @@ function WaveManager() {
 }
 
 
-function HandleCollisions() {
+function handleCollisions() {
     // These collisions make the sprites collide with one another so they may not overlap
     game.physics.arcade.collide(gameWorld.player.sprite, gameWorld.platforms.group);
     game.physics.arcade.collide(gameWorld.stars.group, gameWorld.platforms.group);
     game.physics.arcade.collide(gameWorld.enemies.group, gameWorld.platforms.group);
 
     // These collisions detect if sprites have overlapped and passes those sprites to a method to further handle the outcome
-    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.stars.group, CollectStar);
-    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.enemies.group, EnemyPlayerCollision);
+    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.stars.group, collectStar);
+    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.enemies.group, enemyPlayerCollision);
 }
 
-function CollectStar(player, star) {
+function collectStar(player, star) {
     star.kill();
     game.score += 10;
     ui.setText("Score", "Score: " + game.score);
 }
 
-function EnemyPlayerCollision(player, enemy) {
+function enemyPlayerCollision(player, enemy) {
     if (enemy.attacking) {
         player.health -= enemy.damage
         ui.setPlayerHealth(player.health);
@@ -174,7 +175,7 @@ function EnemyPlayerCollision(player, enemy) {
     }
 
     if (player.health <= 0) {
-        gameWorld.player.Death();
+        gameWorld.player.death();
     }
 
     if (player.attacking) {

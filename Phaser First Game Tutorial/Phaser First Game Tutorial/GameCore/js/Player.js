@@ -18,53 +18,48 @@
         playerSprite.visible = false;
 
         this.sprite = playerSprite;
-    }
 
-    SetPlayerPosition(x, y) {
+        var attackButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR); attackButton.onDown.add(this.attack, this);
+        var jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.UP); jumpButton.onDown.add(this.jump, this);
+   }
+
+    setPlayerPosition(x, y) {
         this.sprite.x = x;
         this.sprite.y = y;
     }
 
-    ResetPlayer() {
+    resetPlayer() {
         this.sprite.visible = false;
         this.sprite.health = 100;
         ui.setPlayerHealth(this.sprite.health);
     }
 
-    HandleInput() {
+    handleInput() {
         var cursors = game.input.keyboard.createCursorKeys();
 
         this.sprite.body.velocity.x -= this.sprite.body.velocity.x / 15;
 
-        if (this.sprite.attacking && this.sprite.timer.seconds > 1) {
+        if (this.sprite.attacking && this.sprite.timer.seconds > 0.4) {
             this.sprite.attacking = false;
             this.sprite.timer.stop();
         }
+
         if (!this.sprite.attacking && cursors.left.isDown) {
-            this.MoveLeft();
+            this.moveLeft();
         }
         else if (!this.sprite.attacking && cursors.right.isDown) {
-            this.MoveRight();
+            this.moveRight();
         }
         else if (!this.sprite.attacking){
-            this.StopMoving();
+            this.stopMoving();
         }
-
-        if (!this.sprite.attacking && cursors.down.isDown && this.sprite.body.touching.down) {
-            this.Attack();
-        }
-
-        if (cursors.up.isDown && this.sprite.body.touching.down) {
-            this.Jump();
-        }
-
     }
 
-    Death() {
-        SceneManager("GameOver");
+    death() {
+        sceneManager("GameOver");
     }
 
-    MoveLeft() {
+    moveLeft() {
         this.sprite.attacking = false;
         console.log("Moving Left <--")
         this.sprite.body.velocity.x = -150;
@@ -73,7 +68,7 @@
         this.sprite.facingLeft = true;
     }
 
-    MoveRight() {
+    moveRight() {
         this.sprite.attacking = false;
         console.log("Moving Right -->")
         this.sprite.body.velocity.x = 150;
@@ -82,7 +77,7 @@
         this.sprite.facingLeft = false;
     }
 
-    Attack() {
+    attack() {
         console.log("Test Attack");
         this.sprite.timer.start();
         this.sprite.attacking = true;
@@ -95,12 +90,12 @@
         }
     }
 
-    Jump() {
+    jump() {
         console.log("Jump!")
         this.sprite.body.velocity.y = -300;
     }
 
-    StopMoving() {
+    stopMoving() {
         this.sprite.animations.stop();
         if (this.sprite.FacingLeft) {
             this.sprite.frame = 3;
