@@ -4,24 +4,86 @@ function testControl(sprite) {
 }
 
 function followPlayerControl(sprite) {
-    // If the sprite isn't attacking
     if (sprite.following) {
-        //console.log("Following player");
+        console.log("Following");
         // if the player sprite x coordinate is higher than this sprites x coordinate
         if (gameWorld.player.sprite.x > sprite.x) {
             // Stop sprite action timer and raise x velocity to move to the right
             sprite.body.velocity.x = sprite.speed;
-            sprite.animations.play('right');
+            sprite.animations.play('run');
             sprite.facingLeft = false;
-            sprite.facingRight = true;
+            sprite.fac1ingRight = true;
+            sprite.scale.setTo(1, 1);
+            // if player is in range to the right
+            if (gameWorld.player.sprite.x - sprite.range < sprite.x) {
+                sprite.attacking = true;
+            } else { sprite.attacking = false; }
         }
         else {
             // Stop sprite action timer and lower x velocity to move to the left
             sprite.body.velocity.x = -sprite.speed;
-            sprite.animations.play('left');
+            sprite.animations.play('run');
             sprite.facingLeft = true;
             sprite.facingRight = false;
+            sprite.scale.setTo(-1, 1);
+            // if player is in range to the left
+            if (gameWorld.player.sprite.x + sprite.range > sprite.x) {
+                sprite.attacking = true;
+            }
+            else { sprite.attacking = false; }
         }
+    }
+}
+
+function xGravityControl(sprite) {
+    // apply resistance on the x axis to slow down entities when they are not using a movement control
+    if (sprite.body.velocity.x > 0) {
+        sprite.body.velocity.x -= 3;
+    }
+    else if (sprite.body.velocity.x < 0) {
+        sprite.body.velocity.x += 3;
+    }
+}
+
+function attackControl(sprite) {
+    if (sprite.attacking) {
+        console.log("Attacking");
+        sprite.following = false;
+        sprite.animations.play('attack');
+        sprite.animations.currentAnim.onComplete.add(function () { sprite.attacking = false; sprite.cooldown = true; }, this);
+    }
+}
+
+function cooldownControl(sprite) {
+    if (sprite.cooldown) {
+        console.log("On Cooldown");
+        sprite.timer.start();
+        sprite.animations.play('idle');
+        if (sprite.timer.seconds > 2) {
+            sprite.cooldown = false;
+            sprite.following = true;
+            sprite.timer.stop();
+        }
+    }
+}
+
+function deathControl(sprite) {
+    if (sprite.health <= 0) {
+        console.log("Death");
+        game.score += 10;
+        ui.setText("Score", "Score: " + game.score);
+        sprite.kill();
+        game.enemiesAlive--;
+    }
+}
+
+function takeDamageControl(sprite) {
+    if (sprite.takingDamage) {
+        sprite.cooldown = false;
+        sprite.attacking = false;
+        sprite.following = false;
+        sprite.animations.play('damaged');
+        sprite.animations.currentAnim.onComplete.add(function () { sprite.takingDamage = false; sprite.following = true; }, this);
     }
 }
 
@@ -58,7 +120,7 @@ function jumpAttackControl(sprite) {
         if (sprite.body.velocity.x > 0) {
             sprite.body.velocity.x -= 3;
         }
-        else if (sprite.body.velocity.x < 0){
+        else if (sprite.body.velocity.x < 0) {
             sprite.body.velocity.x += 3;
         }
         // if the action timer reaches reactionTime, set cooldown to false and stop the action timer

@@ -10,9 +10,9 @@
         playerSprite.animations.add('idle', ['idle.png', 'idle.png'], 5, true);
         playerSprite.animations.add('jump', ['jump.png', 'idle.png'], 1.5, false);
         playerSprite.animations.add('run', ['running1.png', 'running2.png', 'running3.png', 'running4.png'], 7, true);
-        playerSprite.animations.add('attack1', ['attack1.png', 'attack2.png'], 4, false);
-        playerSprite.animations.add('attack2', ['attack3.png', 'attack4.png'], 4, false);
-        playerSprite.animations.add('attack3', ['attack5.png', 'attack6.png', 'attack7.png', 'attack8.png'], 5, false);
+        playerSprite.animations.add('attack1', ['attack1.png', 'attack2.png'], 6, false);
+        playerSprite.animations.add('attack2', ['attack3.png', 'attack4.png'], 6, false);
+        playerSprite.animations.add('attack3', ['attack5.png', 'attack6.png', 'attack7.png', 'attack8.png'], 7, false);
         playerSprite.animations.add('damaged', ['damaged.png'], 5, false);
         playerSprite.health = 100;
         playerSprite.damage = 2;
@@ -55,7 +55,7 @@
             this.sprite.scale.setTo(1, 1);
         }
 
-        if (this.sprite.attackCounterTimer.seconds > 2) {
+        if (this.sprite.attackCounterTimer.seconds > 1) {
             this.sprite.attackCounterTimer.stop();
             this.sprite.attackCounter = 0;
         }
@@ -69,7 +69,7 @@
             }
             else {
                 if (!this.sprite.jumping) {
-                    this.stopMoving();
+                    this.idle();
                 }
             }
         }
@@ -82,10 +82,12 @@
     takeDamage(damage) {
         if (!this.sprite.takingDamage) {
             this.sprite.takingDamage = true;
+            this.sprite.jumping = false;
+            this.sprite.attacking = false;
             this.sprite.health -= damage
             ui.setPlayerHealth(this.sprite.health);
             this.sprite.animations.play('damaged');
-            this.sprite.animations.currentAnim.onComplete.add(function () { this.sprite.takingDamage = false; }, this);
+            this.sprite.animations.currentAnim.onComplete.add(function () { this.sprite.takingDamage = false; this.sprite.attacking = false; }, this);
             if (this.sprite.health <= 0) {
                 this.death();
             }
@@ -93,7 +95,6 @@
     }
 
     moveLeft() {
-        this.sprite.attacking = false;
         console.log("Moving Left <--")
         this.sprite.body.velocity.x = -150;
         if (!this.sprite.jumping) {
@@ -105,7 +106,6 @@
     }
 
     moveRight() {
-        this.sprite.attacking = false;
         console.log("Moving Right -->")
         this.sprite.body.velocity.x = 150;
         if (!this.sprite.jumping) {
@@ -117,7 +117,7 @@
 
     attack() {
         console.log(this.sprite);
-        if (!this.sprite.attacking && this.sprite.attackCounter < 3 && !this.sprite.takingDamage) {
+        if (!this.sprite.attacking  && !this.sprite.takingDamage) {
             this.sprite.attackCounterTimer.stop();
             this.sprite.jumping = false;
             this.sprite.attacking = true;
@@ -146,6 +146,9 @@
             }
 
             this.sprite.attackCounter++;
+            if (this.sprite.attackCounter == 3) {
+                this.sprite.attackCounter = 0;
+            }
             this.sprite.animations.currentAnim.onComplete.add(function (sprite) { sprite.attacking = false; sprite.attackCounterTimer.start(); }, this);
         }
     }
@@ -156,11 +159,11 @@
             console.log("Jump!")
             this.sprite.animations.play('jump');
             this.sprite.animations.currentAnim.onComplete.add(function () { this.sprite.jumping = false; }, this);
-            this.sprite.body.velocity.y = -300;
+            this.sprite.body.velocity.y = -400;
         }
     }
 
-    stopMoving() {
+    idle() {
         this.sprite.animations.play('idle');
     }
 }

@@ -6,7 +6,7 @@
 
         this.platforms = new CollidableGroup(1, 'platform', platformFactory);
         this.stars = new CollidableGroup(5, 'star', starFactory);
-        this.enemies = new CollidableGroup(10, 'enemy', enemyFactory);
+        this.enemies = new CollidableGroup(10, 'enemies', enemyFactory);
         console.log("GameWorld Instantiated.");
     }
 
@@ -35,5 +35,10 @@ function starFactory(sprite) {
 function enemyFactory(sprite) {
     sprite.entity = new Entity();
     sprite.entity.addControl(followPlayerControl);
-    sprite.entity.addControl(jumpAttackControl);
+    //sprite.entity.addControl(jumpAttackControl);
+    sprite.entity.addControl(attackControl);
+    sprite.entity.addControl(cooldownControl);
+    sprite.entity.addControl(deathControl);
+    sprite.entity.addControl(takeDamageControl);
+    sprite.entity.addControl(xGravityControl);
 };

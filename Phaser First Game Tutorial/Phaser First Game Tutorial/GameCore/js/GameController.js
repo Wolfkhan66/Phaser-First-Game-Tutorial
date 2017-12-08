@@ -28,6 +28,7 @@ function preload() {
     game.load.image('HUD', '../GameCore/Assets/HUD/HUD.png');
     game.load.image('HealthBar', '../GameCore/Assets/HUD/HealthBarLine.png');
     game.load.atlasJSONHash('player', '../GameCore/Assets/Player/player.png', '../GameCore/Assets/Player/player.json');
+    game.load.atlasJSONHash('enemies', '../GameCore/Assets/Enemies/enemies.png', '../GameCore/Assets/Enemies/enemies.json');
 
     console.log("preload complete.");
 }
@@ -163,24 +164,22 @@ function collectStar(player, star) {
 function enemyPlayerCollision(player, enemy) {
     if (enemy.attacking) {
         gameWorld.player.takeDamage(enemy.damage);
-        // set attacking to false to stop the enemy damaging the player 60 times per second.
-        enemy.attacking = false;
+        if (enemy.facingLeft) {
+            player.body.velocity.x = -200;
+        }
+        if (enemy.facingRight) {
+            player.body.velocity.x = 200;
+        }
     }
 
     if (player.attacking) {
         enemy.health -= player.damage;
+        enemy.takingDamage = true;
         if (player.facingLeft) {
-            enemy.body.velocity.x = -500;
+            enemy.body.velocity.x = -200;
         }
         if (player.facingRight) {
-            enemy.body.velocity.x = 500;
+            enemy.body.velocity.x = 200;
         }
-    }
-
-    if (enemy.health <= 0) {
-        game.score += 10;
-        ui.setText("Score", "Score: " + game.score);
-        enemy.kill();
-        game.enemiesAlive--;
     }
 }
