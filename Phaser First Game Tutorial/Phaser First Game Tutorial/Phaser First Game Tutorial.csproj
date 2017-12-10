@@ -155,6 +155,7 @@
     <Content Include="GameCore\Assets\HUD\HealthBar.png" />
     <Content Include="GameCore\Assets\HUD\HealthBarLine.png" />
     <Content Include="GameCore\Assets\HUD\HUD.png" />
+    <Content Include="GameCore\Assets\jungle tileset.png" />
     <Content Include="GameCore\Assets\Player\player.png" />
     <Content Include="GameCore\Assets\Collectibles\firstaid.png" />
     <Content Include="GameCore\Assets\platform.png" />
@@ -181,6 +182,7 @@
     <Content Include="GameCore\js\Player.js" />
     <Content Include="GameCore\Assets\Player\player.json" />
     <Content Include="GameCore\Assets\Enemies\enemies.json" />
+    <Content Include="GameCore\Assets\Map1.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />

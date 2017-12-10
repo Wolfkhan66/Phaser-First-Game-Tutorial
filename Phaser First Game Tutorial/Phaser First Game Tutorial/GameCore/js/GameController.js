@@ -30,21 +30,25 @@ function preload() {
     game.load.atlasJSONHash('player', '../GameCore/Assets/Player/player.png', '../GameCore/Assets/Player/player.json');
     game.load.atlasJSONHash('enemies', '../GameCore/Assets/Enemies/enemies.png', '../GameCore/Assets/Enemies/enemies.json');
 
+    game.load.tilemap('map', '../GameCore/Assets/Map1.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.image('jungle tileset', '../GameCore/Assets/jungle tileset.png');
+
     console.log("preload complete.");
 }
 
 function create() {
     console.log("create();");
+
     game.actionTimer = game.time.create(false);
     // set the bounds of the game world to 1920x1080 so the world is larger than the canvas
-    game.world.setBounds(0, 0, 800, 600);
+    game.world.setBounds(0, 0, 2400, 600);
     //Instantiate The GameWorld and system classes
     gameWorld = new GameWorld();
     ui = new UI();
     audio = new Audio();
 
-    // set the build in camera to follow the player sprite and set it to platformer mode
-    // game.camera.follow(gameWorld.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
+    // set the built in camera to follow the player sprite and set it to platformer mode
+    game.camera.follow(gameWorld.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
 
     sceneManager("Menu");
     console.log("create complete.");
@@ -91,10 +95,10 @@ function sceneManager(scene) {
             resetGame();
             ui.showUI("InGameUI");
             gameWorld.background.loadTexture('Map1Background');
-            gameWorld.background.visible = true;
+            //gameWorld.background.visible = true;
             gameWorld.player.sprite.visible = true;
             gameWorld.player.setPlayerPosition(game.width / 2, game.height / 2);
-            gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
+            gameWorld.createMap1();
             game.currentMap = "Map1";
             break;
         }
@@ -102,7 +106,7 @@ function sceneManager(scene) {
             resetGame();
             ui.showUI("InGameUI");
             gameWorld.background.loadTexture('background');
-            gameWorld.background.visible = true;
+            //gameWorld.background.visible = true;
             gameWorld.player.sprite.visible = true;
             gameWorld.player.setPlayerPosition(game.width / 2, game.height / 2);
             gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
@@ -151,6 +155,9 @@ function handleCollisions() {
     game.physics.arcade.collide(gameWorld.player.sprite, gameWorld.platforms.group);
     game.physics.arcade.collide(gameWorld.stars.group, gameWorld.platforms.group);
     game.physics.arcade.collide(gameWorld.enemies.group, gameWorld.platforms.group);
+
+    game.physics.arcade.collide(gameWorld.player.sprite, gameWorld.layer);
+    game.physics.arcade.collide(gameWorld.enemies.group, gameWorld.layer);
 
     // These collisions detect if sprites have overlapped and passes those sprites to a method to further handle the outcome
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.stars.group, collectStar);

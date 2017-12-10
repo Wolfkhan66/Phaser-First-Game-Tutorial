@@ -37,7 +37,7 @@
     }
 
     createText(Name, UI, x, y, string, size, event) {
-        var textObject = game.add.text(x, y, string, {
+        var textObject = game.add.text(0, 0, string, {
             font: size + 'px Old English Text MT',
             fill: '#fff'
         });
@@ -45,13 +45,17 @@
             textObject.inputEnabled = true;
             textObject.events.onInputDown.add(event, this);
         }
+        textObject.fixedToCamera = true;
+        textObject.cameraOffset.setTo(x, y);
         this.textObjects.push({ Name: Name, UI: UI, Text: textObject });
     }
 
     createSprite(Name, UI, x, y, width, height, image) {
-        var sprite = game.add.sprite(x, y, image);
+        var sprite = game.add.sprite(0, 0, image);
         sprite.width = width;
         sprite.height = height;
+        sprite.fixedToCamera = true;
+        sprite.cameraOffset.setTo(x, y);
         this.sprites.push({ Name: Name, UI: UI, Sprite: sprite });
     }
 
