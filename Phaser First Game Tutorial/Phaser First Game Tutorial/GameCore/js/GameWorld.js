@@ -2,6 +2,7 @@
     constructor() {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         this.background = game.add.sprite(0, 0, 'background');
+        this.background.visible = false;
         this.player = new Player();
 
         this.platforms = new CollidableGroup(1, 'platform', platformFactory);

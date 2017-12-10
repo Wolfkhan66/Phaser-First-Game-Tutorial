@@ -14,21 +14,26 @@
         
         // MainMenuUI \\
         this.createSprite('SplashScreen', 'MainMenuUI', 0, 0, 800, 600, 'SplashScreen');
-        this.createText('StartGameText', 'MainMenuUI', (game.width / 2) - 34, (game.height / 2) - 34, 'Click to Start', 25, function () { return sceneManager("DifficultySelect") });
+        this.createText('NewGameText', 'MainMenuUI', (game.width / 2) - 34, (game.height / 2), 'New Game', 25, function () { return sceneManager("DifficultySelect") });
+        this.createText('SplashText', 'MainMenuUI', (game.width / 5), (game.height / 6) , 'InExile', 150, function () { return sceneManager("DifficultySelect") });
 
         // DifficultySelectUI \\
-        this.createText('Easy', 'DifficultySelectUI', (game.width / 2), (game.height / 2), 'Easy', 25, function () { game.difficultyLevel = 1; return sceneManager("MapSelect"); });
-        this.createText('Normal', 'DifficultySelectUI', (game.width / 2), (game.height / 2) + 30, 'Normal', 25, function () { game.difficultyLevel = 2; return sceneManager("MapSelect"); });
-        this.createText('Hard', 'DifficultySelectUI', (game.width / 2), (game.height / 2) + 60, 'Hard', 25, function () { game.difficultyLevel = 3; return sceneManager("MapSelect"); });
-        this.createText('BackFromDifficultySelect', 'DifficultySelectUI', (game.width / 2), (game.height / 2) + 120, 'Back', 25, function () { game.difficultyLevel = 3; return sceneManager("MainMenu"); });
+        this.createSprite('SplashScreen', 'DifficultySelectUI', 0, 0, 800, 600, 'SplashScreen');
+        this.createText('Easy', 'DifficultySelectUI', (game.width / 2) - 34, (game.height / 2), 'Easy', 25, function () { game.difficultyLevel = 1; return sceneManager("MapSelect"); });
+        this.createText('Normal', 'DifficultySelectUI', (game.width / 2) - 34, (game.height / 2) + 30, 'Normal', 25, function () { game.difficultyLevel = 2; return sceneManager("MapSelect"); });
+        this.createText('Hard', 'DifficultySelectUI', (game.width / 2) - 34, (game.height / 2) + 60, 'Hard', 25, function () { game.difficultyLevel = 3; return sceneManager("MapSelect"); });
+        this.createText('BackFromDifficultySelect', 'DifficultySelectUI', (game.width / 2) - 34, (game.height / 2) + 120, 'Back', 25, function () { return sceneManager("Menu"); });
 
         // MapSelectUI \\
-        this.createText('Map1', 'MapSelectUI', (game.width / 2), (game.height / 2), 'Map 1', 25, function () { return sceneManager("Map1") });
-        this.createText('Map2', 'MapSelectUI', (game.width / 2), (game.height / 2) + 30, 'Map 2', 25, function () { return sceneManager("Map2") });
-        this.createText('BackFromMapSelect', 'MapSelectUI', (game.width / 2), (game.height / 2) + 90, 'Back', 25, function () { return sceneManager("DifficultySelect") });
+        this.createSprite('SplashScreen', 'MapSelectUI', 0, 0, 800, 600, 'SplashScreen');
+        this.createText('Map1', 'MapSelectUI', (game.width / 2) - 34, (game.height / 2), 'Map 1', 25, function () { return sceneManager("Map1") });
+        this.createText('Map2', 'MapSelectUI', (game.width / 2) - 34, (game.height / 2) + 30, 'Map 2', 25, function () { return sceneManager("Map2") });
+        this.createText('BackFromMapSelect', 'MapSelectUI', (game.width / 2) - 34, (game.height / 2) + 90, 'Back', 25, function () { return sceneManager("DifficultySelect") });
 
         // GameOverUI \\
-        this.createText('GameOver', 'GameOverUI', (game.width / 3.5), (game.height / 2) - 68, 'Game Over', 25, function () { return sceneManager("Menu") });
+        this.createSprite('SplashScreen', 'GameOverUI', 0, 0, 800, 600, 'SplashScreen');
+        this.createText('GameOver', 'GameOverUI', (game.width / 5), (game.height / 4), 'Game Over', 100, function () {});
+        this.createText('TryAgain?', 'GameOverUI', (game.width / 2) - 44, (game.height / 2), 'Try Again?', 25, function () { return sceneManager("DifficultySelect") });
     }
 
     createText(Name, UI, x, y, string, size, event) {

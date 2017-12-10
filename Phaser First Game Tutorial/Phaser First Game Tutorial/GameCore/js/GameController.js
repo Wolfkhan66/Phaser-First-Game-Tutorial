@@ -91,6 +91,7 @@ function sceneManager(scene) {
             resetGame();
             ui.showUI("InGameUI");
             gameWorld.background.loadTexture('Map1Background');
+            gameWorld.background.visible = true;
             gameWorld.player.sprite.visible = true;
             gameWorld.player.setPlayerPosition(game.width / 2, game.height / 2);
             gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
@@ -101,6 +102,7 @@ function sceneManager(scene) {
             resetGame();
             ui.showUI("InGameUI");
             gameWorld.background.loadTexture('background');
+            gameWorld.background.visible = true;
             gameWorld.player.sprite.visible = true;
             gameWorld.player.setPlayerPosition(game.width / 2, game.height / 2);
             gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
