@@ -1,8 +1,6 @@
 ﻿class GameWorld {
     constructor() {
         game.physics.startSystem(Phaser.Physics.ARCADE);
-        this.background = game.add.sprite(0, 0, 'background');
-        this.background.visible = false;
         this.player = new Player();
 
         this.map = game.add.tilemap('map');
@@ -10,7 +8,6 @@
         this.map.visible = false;
         this.layer.visible = false;
 
-        this.platforms = new CollidableGroup(1, 'platform', platformFactory);
         this.stars = new CollidableGroup(5, 'star', starFactory);
         this.enemies = new CollidableGroup(10, 'enemies', enemyFactory);
         console.log("GameWorld Instantiated.");
@@ -23,7 +20,6 @@
     }
 
     cleanup() {
-        this.platforms.destroyGroup();
         this.stars.destroyGroup();
         this.enemies.destroyGroup();
     }
@@ -41,10 +37,6 @@
         game.world.sendToBack(this.map);
         game.world.sendToBack(this.layer);
     }
-}
-
-function platformFactory(sprite) {
-    sprite.entity = new Entity();
 }
 
 function starFactory(sprite) {

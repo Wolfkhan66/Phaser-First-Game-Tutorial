@@ -20,18 +20,14 @@ function preload() {
     console.log("preload();");
     // Load game assets
     game.load.spritesheet('enemy', '../GameCore/Assets/Enemies/baddie.png', 32, 32);
-    game.load.image('background', '../GameCore/Assets/Screens/background.png');
-    game.load.image('Map1Background', '../GameCore/Assets/Screens/Map1Background.jpg');
     game.load.image('SplashScreen', '../GameCore/Assets/Screens/SplashScreen.png');
-    game.load.image('platform', '../GameCore/Assets/platform.png');
     game.load.image('star', '../GameCore/Assets/Collectibles/star.png');
     game.load.image('HUD', '../GameCore/Assets/HUD/HUD.png');
     game.load.image('HealthBar', '../GameCore/Assets/HUD/HealthBarLine.png');
     game.load.atlasJSONHash('player', '../GameCore/Assets/Player/player.png', '../GameCore/Assets/Player/player.json');
     game.load.atlasJSONHash('enemies', '../GameCore/Assets/Enemies/enemies.png', '../GameCore/Assets/Enemies/enemies.json');
-
-    game.load.tilemap('map', '../GameCore/Assets/Map1.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.image('jungle tileset', '../GameCore/Assets/jungle tileset.png');
+    game.load.tilemap('map', '../GameCore/Assets/Maps/Map1.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.image('jungle tileset', '../GameCore/Assets/Maps/jungle tileset.png');
 
     console.log("preload complete.");
 }
@@ -88,14 +84,13 @@ function sceneManager(scene) {
             break;
         }
         case "GameOver": {
+            resetGame();
             ui.showUI("GameOverUI");
             break;
         }
         case "Map1": {
             resetGame();
             ui.showUI("InGameUI");
-            gameWorld.background.loadTexture('Map1Background');
-            //gameWorld.background.visible = true;
             gameWorld.player.sprite.visible = true;
             gameWorld.player.setPlayerPosition(game.width / 2, game.height / 2);
             gameWorld.createMap1();
@@ -105,11 +100,8 @@ function sceneManager(scene) {
         case "Map2": {
             resetGame();
             ui.showUI("InGameUI");
-            gameWorld.background.loadTexture('background');
-            //gameWorld.background.visible = true;
             gameWorld.player.sprite.visible = true;
             gameWorld.player.setPlayerPosition(game.width / 2, game.height / 2);
-            gameWorld.platforms.createPlatform(0, 600 - 64, 2, 2);
             game.currentMap = "Map2";
             break;
         }
@@ -149,13 +141,8 @@ function waveManager() {
     }
 }
 
-
 function handleCollisions() {
     // These collisions make the sprites collide with one another so they may not overlap
-    game.physics.arcade.collide(gameWorld.player.sprite, gameWorld.platforms.group);
-    game.physics.arcade.collide(gameWorld.stars.group, gameWorld.platforms.group);
-    game.physics.arcade.collide(gameWorld.enemies.group, gameWorld.platforms.group);
-
     game.physics.arcade.collide(gameWorld.player.sprite, gameWorld.layer);
     game.physics.arcade.collide(gameWorld.enemies.group, gameWorld.layer);
 

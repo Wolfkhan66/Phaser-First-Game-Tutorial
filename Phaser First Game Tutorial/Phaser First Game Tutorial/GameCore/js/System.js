@@ -11,11 +11,11 @@
         this.createText('EnemyCounter', 'InGameUI', 355, 50, 'Enemies: ', 20, null);
         this.createText('WaveHelperText', 'InGameUI', 270, (game.height / 2) - 100, 'Prepare Yourself!', 40, null);
         this.createText('Score', 'InGameUI', 660, 2, 'Score: 0', 20, null);
-        
+
         // MainMenuUI \\
         this.createSprite('SplashScreen', 'MainMenuUI', 0, 0, 800, 600, 'SplashScreen');
         this.createText('NewGameText', 'MainMenuUI', (game.width / 2) - 34, (game.height / 2), 'New Game', 25, function () { return sceneManager("DifficultySelect") });
-        this.createText('SplashText', 'MainMenuUI', (game.width / 5), (game.height / 6) , 'InExile', 150, function () { return sceneManager("DifficultySelect") });
+        this.createText('SplashText', 'MainMenuUI', (game.width / 5), (game.height / 6), 'InExile', 150, function () { return sceneManager("DifficultySelect") });
 
         // DifficultySelectUI \\
         this.createSprite('SplashScreen', 'DifficultySelectUI', 0, 0, 800, 600, 'SplashScreen');
@@ -32,7 +32,7 @@
 
         // GameOverUI \\
         this.createSprite('SplashScreen', 'GameOverUI', 0, 0, 800, 600, 'SplashScreen');
-        this.createText('GameOver', 'GameOverUI', (game.width / 5), (game.height / 4), 'Game Over', 100, function () {});
+        this.createText('GameOver', 'GameOverUI', (game.width / 5), (game.height / 4), 'Game Over', 100, function () { });
         this.createText('TryAgain?', 'GameOverUI', (game.width / 2) - 44, (game.height / 2), 'Try Again?', 25, function () { return sceneManager("DifficultySelect") });
     }
 

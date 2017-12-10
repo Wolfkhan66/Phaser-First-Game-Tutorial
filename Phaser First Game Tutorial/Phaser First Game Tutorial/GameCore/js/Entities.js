@@ -32,18 +32,6 @@ class CollidableGroup {
         this.group = group;
     }
 
-    createPlatform(x, y, scaleX, scaleY) {
-        // get the first sprite in the group that is not in use
-        const platform = this.group.getFirstExists(false);
-        if (platform) {
-            // reset the x and y of the sprite and set the scale
-            platform.reset(x, y);
-            platform.scale.setTo(scaleX, scaleY);
-            // make the sprite body immovable to ensure the player collides properly with them.
-            platform.body.immovable = true;
-        }
-    }
-
     createStar(x, y, scaleX, scaleY) {
         // get the first sprite in the group that is not in use
         const star = this.group.getFirstExists(false);
@@ -90,7 +78,7 @@ class CollidableGroup {
             enemy.following = true;
             enemy.takingDamage = false;
         }
-     }
+    }
 
     updateGroup() {
         // For any sprites in this group in use, call their entity update function

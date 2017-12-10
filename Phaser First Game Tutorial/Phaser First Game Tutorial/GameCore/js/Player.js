@@ -117,7 +117,7 @@
 
     attack() {
         console.log(this.sprite);
-        if (!this.sprite.attacking  && !this.sprite.takingDamage) {
+        if (!this.sprite.attacking && !this.sprite.takingDamage) {
             this.sprite.attackCounterTimer.stop();
             this.sprite.jumping = false;
             this.sprite.attacking = true;

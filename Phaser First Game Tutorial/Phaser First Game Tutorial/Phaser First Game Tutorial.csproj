@@ -155,12 +155,9 @@
     <Content Include="GameCore\Assets\HUD\HealthBar.png" />
     <Content Include="GameCore\Assets\HUD\HealthBarLine.png" />
     <Content Include="GameCore\Assets\HUD\HUD.png" />
-    <Content Include="GameCore\Assets\jungle tileset.png" />
+    <Content Include="GameCore\Assets\Maps\jungle tileset.png" />
     <Content Include="GameCore\Assets\Player\player.png" />
     <Content Include="GameCore\Assets\Collectibles\firstaid.png" />
-    <Content Include="GameCore\Assets\platform.png" />
-    <Content Include="GameCore\Assets\Screens\background.png" />
-    <Content Include="GameCore\Assets\Screens\Map1Background.jpg" />
     <Content Include="GameCore\Assets\Screens\SplashScreen.png" />
     <Content Include="GameCore\Assets\Collectibles\star.png" />
     <Content Include="Content\bootstrap.css" />
@@ -182,7 +179,7 @@
     <Content Include="GameCore\js\Player.js" />
     <Content Include="GameCore\Assets\Player\player.json" />
     <Content Include="GameCore\Assets\Enemies\enemies.json" />
-    <Content Include="GameCore\Assets\Map1.json" />
+    <Content Include="GameCore\Assets\Maps\Map1.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
