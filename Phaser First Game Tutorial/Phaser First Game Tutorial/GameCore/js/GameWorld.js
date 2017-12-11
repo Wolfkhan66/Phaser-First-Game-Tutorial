@@ -32,38 +32,17 @@
         this.layer.resizeWorld();
         game.world.sendToBack(this.map);
         game.world.sendToBack(this.layer);
-        this.createParalexBackground();
+        this.createParalexBackground("Paralex1", 0.4);
+        this.createParalexBackground("Paralex2", 0.6);
+        this.createParalexBackground("Paralex3", 0.8);
+        this.createParalexBackground("Paralex4", 1);
+        this.createParalexBackground("Paralex5", 0);
     }
 
-    createParalexBackground() {
-        // Needs refactoring to follow DRY principle
+    createParalexBackground(name, speed) {
         for (var i = -3; i < 3; i++) {
-            var sprite = game.add.sprite(799 * i, 0, 'Paralex1');
-            sprite.update = function () { if (game.cameraMovingLeft) { this.x -= 0.4 } if (game.cameraMovingRight) { this.x += 0.4 } }
-            game.world.sendToBack(sprite);
-            this.paralex.push(sprite);
-        }
-        for (var i = -3; i < 3; i++) {
-            var sprite = game.add.sprite(799 * i, 0, 'Paralex2');
-            sprite.update = function () { if (game.cameraMovingLeft) { this.x -= 0.6 } if (game.cameraMovingRight) { this.x += 0.6 } }
-            game.world.sendToBack(sprite);
-            this.paralex.push(sprite);
-        }
-        for (var i = -3; i < 3; i++) {
-            var sprite = game.add.sprite(799 * i, 0, 'Paralex3');
-            sprite.update = function () { if (game.cameraMovingLeft) { this.x -= 0.8 } if (game.cameraMovingRight) { this.x += 0.8 } }
-            game.world.sendToBack(sprite);
-            this.paralex.push(sprite);
-        }
-        for (var i = -3; i < 3; i++) {
-            var sprite = game.add.sprite(799 * i, 0, 'Paralex4');
-            sprite.update = function () { if (game.cameraMovingLeft) { this.x -= 1 } if (game.cameraMovingRight) { this.x += 1 } }
-            game.world.sendToBack(sprite);
-            this.paralex.push(sprite);
-        }
-        for (var i = -3; i < 3; i++) {
-            var sprite = game.add.sprite(799 * i, 0, 'Paralex5');
-            sprite.update = function () { }
+            var sprite = game.add.sprite(799 * i, 0, name);
+            sprite.update = function () { if (game.cameraMovingLeft) { this.x -= speed } if (game.cameraMovingRight) { this.x += speed } }
             game.world.sendToBack(sprite);
             this.paralex.push(sprite);
         }
