@@ -149,12 +149,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GameCore\Assets\Backgrounds\Paralex1.png" />
+    <Content Include="GameCore\Assets\Backgrounds\Paralex2.png" />
+    <Content Include="GameCore\Assets\Backgrounds\Paralex3.png" />
+    <Content Include="GameCore\Assets\Backgrounds\Paralex4.png" />
+    <Content Include="GameCore\Assets\Backgrounds\Paralex5.png" />
     <Content Include="GameCore\Assets\Enemies\baddie.png" />
     <Content Include="GameCore\Assets\Collectibles\diamond.png" />
     <Content Include="GameCore\Assets\Enemies\enemies.png" />
+    <Content Include="GameCore\Assets\HUD\AttackButton.png" />
     <Content Include="GameCore\Assets\HUD\HealthBar.png" />
     <Content Include="GameCore\Assets\HUD\HealthBarLine.png" />
     <Content Include="GameCore\Assets\HUD\HUD.png" />
+    <Content Include="GameCore\Assets\HUD\JumpButton.png" />
+    <Content Include="GameCore\Assets\HUD\LeftButton.png" />
+    <Content Include="GameCore\Assets\HUD\RightButton.png" />
     <Content Include="GameCore\Assets\Maps\jungle tileset.png" />
     <Content Include="GameCore\Assets\Player\player.png" />
     <Content Include="GameCore\Assets\Collectibles\firstaid.png" />

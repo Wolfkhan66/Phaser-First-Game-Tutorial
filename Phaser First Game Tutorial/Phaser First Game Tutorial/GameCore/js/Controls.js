@@ -5,7 +5,6 @@ function testControl(sprite) {
 
 function followPlayerControl(sprite) {
     if (sprite.following) {
-        console.log("Following");
         // if the player sprite x coordinate is higher than this sprites x coordinate
         if (gameWorld.player.sprite.x > sprite.x) {
             // Stop sprite action timer and raise x velocity to move to the right
@@ -47,7 +46,6 @@ function xGravityControl(sprite) {
 
 function attackControl(sprite) {
     if (sprite.attacking) {
-        console.log("Attacking");
         sprite.following = false;
         sprite.animations.play('attack');
         sprite.animations.currentAnim.onComplete.add(function () { sprite.attacking = false; sprite.cooldown = true; }, this);
@@ -56,7 +54,6 @@ function attackControl(sprite) {
 
 function cooldownControl(sprite) {
     if (sprite.cooldown) {
-        console.log("On Cooldown");
         sprite.timer.start();
         sprite.animations.play('idle');
         if (sprite.timer.seconds > 2) {
@@ -69,7 +66,6 @@ function cooldownControl(sprite) {
 
 function deathControl(sprite) {
     if (sprite.health <= 0) {
-        console.log("Death");
         game.score += 10;
         ui.setText("Score", "Score: " + game.score);
         sprite.kill();

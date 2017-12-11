@@ -26,11 +26,13 @@
         playerSprite.attackCounterTimer = game.time.create(false);
         playerSprite.visible = false;
 
+        playerSprite.leftButton = false;
+        playerSprite.rightButton = false;
 
         this.sprite = playerSprite;
 
-        var attackButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR); attackButton.onDown.add(this.attack, this);
-        var jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.UP); jumpButton.onDown.add(this.jump, this);
+        var attackKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR); attackKey.onDown.add(this.attack, this);
+        var jumpKey = game.input.keyboard.addKey(Phaser.Keyboard.UP); jumpKey.onDown.add(this.jump, this);
     }
 
     setPlayerPosition(x, y) {
@@ -61,19 +63,28 @@
         }
 
         if (!this.sprite.attacking && !this.sprite.takingDamage) {
-            if (cursors.left.isDown) {
+            if (this.sprite.leftButton) {
                 this.moveLeft();
             }
-            else if (cursors.right.isDown) {
+            else if (this.sprite.rightButton) {
                 this.moveRight();
             }
             else {
-                if (!this.sprite.jumping) {
-                    this.idle();
+                if (cursors.left.isDown) {
+                    this.moveLeft();
+                }
+                else if (cursors.right.isDown) {
+                    this.moveRight();
+                }
+                else {
+                    if (!this.sprite.jumping) {
+                        this.idle();
+                    }
                 }
             }
         }
     }
+
 
     death() {
         sceneManager("GameOver");
@@ -165,5 +176,20 @@
 
     idle() {
         this.sprite.animations.play('idle');
+    }
+
+    activateHoldButton(button, bool) {
+        if (bool) {
+            switch (button) {
+                case "Left": {
+                    this.moveLeft();
+                    break;
+                }
+                case "Right": {
+                    this.moveRight();
+                    break;
+                }
+            }
+        }
     }
 }

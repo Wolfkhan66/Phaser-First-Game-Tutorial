@@ -17,23 +17,27 @@
 }
 
 function preload() {
-    console.log("preload();");
+    console.log("Loading Assets...");
     // Load game assets
     game.load.spritesheet('enemy', '../GameCore/Assets/Enemies/baddie.png', 32, 32);
     game.load.image('SplashScreen', '../GameCore/Assets/Screens/SplashScreen.png');
     game.load.image('star', '../GameCore/Assets/Collectibles/star.png');
     game.load.image('HUD', '../GameCore/Assets/HUD/HUD.png');
+    game.load.image('LeftButton', '../GameCore/Assets/HUD/LeftButton.png');
+    game.load.image('RightButton', '../GameCore/Assets/HUD/RightButton.png');
+    game.load.image('AttackButton', '../GameCore/Assets/HUD/AttackButton.png');
+    game.load.image('JumpButton', '../GameCore/Assets/HUD/JumpButton.png');
     game.load.image('HealthBar', '../GameCore/Assets/HUD/HealthBarLine.png');
     game.load.atlasJSONHash('player', '../GameCore/Assets/Player/player.png', '../GameCore/Assets/Player/player.json');
     game.load.atlasJSONHash('enemies', '../GameCore/Assets/Enemies/enemies.png', '../GameCore/Assets/Enemies/enemies.json');
     game.load.tilemap('map', '../GameCore/Assets/Maps/Map1.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('jungle tileset', '../GameCore/Assets/Maps/jungle tileset.png');
 
-    console.log("preload complete.");
+    console.log("Assets Loaded.");
 }
 
 function create() {
-    console.log("create();");
+    console.log("Creating World...");
 
     game.actionTimer = game.time.create(false);
     // set the bounds of the game world to 1920x1080 so the world is larger than the canvas
@@ -47,7 +51,7 @@ function create() {
     game.camera.follow(gameWorld.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
 
     sceneManager("Menu");
-    console.log("create complete.");
+    console.log("Create complete.");
 }
 
 function update() {
