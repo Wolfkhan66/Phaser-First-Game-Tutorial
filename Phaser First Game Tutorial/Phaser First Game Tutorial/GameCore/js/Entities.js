@@ -32,27 +32,17 @@ class CollidableGroup {
         this.group = group;
     }
 
-    createEnemy(x, y, scaleX, scaleY) {
+    createEnemy(x, y, Type) {
         console.log("Creating enemy");
         // get the first sprite in the group that is not in use
         const enemy = this.group.getFirstExists(false);
         if (enemy) {
             enemy.body.collideWorldBounds = true;
             enemy.reset(x, y);
-            enemy.scale.setTo(scaleX, scaleY);
             enemy.body.gravity.y = 500;
-            enemy.anchor.setTo(0.5, 0.5);
-            enemy.animations.add('attack', ['Test/attack1.png', 'Test/attack2.png'], 6, false);
-            enemy.animations.add('run', ['Test/running1.png', 'Test/running2.png', 'Test/running3.png', 'Test/running4.png'], 7, true);
-            enemy.animations.add('idle', ['Test/idle.png', 'Test/idle.png'], 2, true);
-            enemy.animations.add('damaged', ['Test/damaged.png', 'Test/damaged.png'], 2, false);
+            //enemy.anchor.setTo(0.5, 0.5);
             enemy.body.bounce.y = 0.3;
             enemy.timer = game.time.create(false);
-            enemy.health = 50;
-            enemy.range = game.rnd.integerInRange(20, 80);
-            enemy.speed = game.rnd.integerInRange(30, 100);
-            enemy.damage = game.rnd.integerInRange(4, 6);
-            enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
             enemy.facingLeft = false;
             enemy.facingRight = false;
             enemy.attacking = false;
@@ -61,6 +51,102 @@ class CollidableGroup {
             enemy.chargingAttack = false;
             enemy.following = true;
             enemy.takingDamage = false;
+            this.setAnimations(enemy, Type);
+            this.setStats(enemy, Type);
+        }
+    }
+
+    setAnimations(enemy, Type) {
+        switch (Type) {
+            case "Warrior": {
+                enemy.animations.add('attack', ['attack1.png', 'attack2.png'], 6, false);
+                enemy.animations.add('move', ['moving1.png', 'moving2.png'], 7, true);
+                enemy.animations.add('idle', ['idle.png', 'idle.png'], 2, true);
+                enemy.animations.add('damaged', ['damaged.png', 'damaged.png'], 2, false);
+                break;
+            }
+            case "Archer": {
+                enemy.animations.add('attack', ['attack1.png', 'attack2.png'], 6, false);
+                enemy.animations.add('move', ['moving1.png', 'moving2.png'], 7, true);
+                enemy.animations.add('idle', ['idle.png', 'idle.png'], 2, true);
+                enemy.animations.add('damaged', ['damaged.png', 'damaged.png'], 2, false);
+                break;
+            }
+            case "Mage": {
+                enemy.animations.add('attack', ['attack1.png', 'attack2.png'], 6, false);
+                enemy.animations.add('move', ['moving1.png', 'moving2.png'], 7, true);
+                enemy.animations.add('idle', ['idle.png', 'idle.png'], 2, true);
+                enemy.animations.add('damaged', ['idle.png', 'idle.png'], 2, false);
+                break;
+            }
+            case "Mystic": {
+                enemy.animations.add('attack', ['attack1.png', 'attack2.png'], 6, false);
+                enemy.animations.add('move', ['moving1.png', 'moving2.png'], 7, true);
+                enemy.animations.add('idle', ['idle.png', 'idle.png'], 2, true);
+                enemy.animations.add('damaged', ['idle.png', 'idle.png'], 2, false);
+                break;
+            }
+            case "Critter1": {
+                enemy.animations.add('move', ['Critter1/moving1.png', 'Critter1/moving2.png'], 7, true);
+                break;
+            }
+            case "Critter2": {
+                enemy.animations.add('move', ['Critter2/moving1.png', 'Critter2/moving2.png'], 7, true);
+                break;
+            }
+        }
+    }
+
+    setStats(enemy, Type) {
+        switch (Type) {
+            case "Warrior": {
+                enemy.health = 50;
+                enemy.range = game.rnd.integerInRange(60, 80);
+                enemy.speed = game.rnd.integerInRange(50, 100);
+                enemy.damage = game.rnd.integerInRange(5, 10);
+                enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
+                break;
+            }
+            case "Archer": {
+                enemy.health = 25;
+                enemy.range = game.rnd.integerInRange(300, 350);
+                enemy.speed = game.rnd.integerInRange(30, 100);
+                enemy.damage = game.rnd.integerInRange(2, 4);
+                enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
+                break;
+            }
+            case "Mage": {
+                enemy.health = 15;
+                enemy.range = game.rnd.integerInRange(300, 350);
+                enemy.speed = game.rnd.integerInRange(30, 100);
+                enemy.damage = game.rnd.integerInRange(4, 6);
+                enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
+                break;
+            }
+            case "Mystic": {
+                enemy.health = 100;
+                enemy.range = game.rnd.integerInRange(20, 80);
+                enemy.speed = game.rnd.integerInRange(30, 100);
+                enemy.damage = game.rnd.integerInRange(4, 6);
+                enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
+                break;
+            }
+            case "Critter1": {
+                enemy.health = 2;
+                enemy.range = game.rnd.integerInRange(20, 80);
+                enemy.speed = game.rnd.integerInRange(50, 100);
+                enemy.damage = game.rnd.integerInRange(1, 2);
+                enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
+                break;
+            }
+            case "Critter2": {
+                enemy.health = 2;
+                enemy.range = game.rnd.integerInRange(20, 80);
+                enemy.speed = game.rnd.integerInRange(50, 100);
+                enemy.damage = game.rnd.integerInRange(1, 2);
+                enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
+                break;
+            }
         }
     }
 

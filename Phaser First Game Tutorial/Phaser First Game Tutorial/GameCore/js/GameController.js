@@ -24,9 +24,7 @@
 function preload() {
     console.log("Loading Assets...");
     // Load game assets
-    game.load.spritesheet('enemy', '../GameCore/Assets/Enemies/baddie.png', 32, 32);
     game.load.image('SplashScreen', '../GameCore/Assets/Screens/SplashScreen.png');
-    game.load.image('star', '../GameCore/Assets/Collectibles/star.png');
     game.load.image('Paralex1', '../GameCore/Assets/Backgrounds/Paralex1.png');
     game.load.image('Paralex2', '../GameCore/Assets/Backgrounds/Paralex2.png');
     game.load.image('Paralex3', '../GameCore/Assets/Backgrounds/Paralex3.png');
@@ -39,7 +37,11 @@ function preload() {
     game.load.image('JumpButton', '../GameCore/Assets/HUD/JumpButton.png');
     game.load.image('HealthBar', '../GameCore/Assets/HUD/HealthBarLine.png');
     game.load.atlasJSONHash('player', '../GameCore/Assets/Player/player.png', '../GameCore/Assets/Player/player.json');
-    game.load.atlasJSONHash('enemies', '../GameCore/Assets/Enemies/enemies.png', '../GameCore/Assets/Enemies/enemies.json');
+    game.load.atlasJSONHash('archer', '../GameCore/Assets/Enemies/archer.png', '../GameCore/Assets/Enemies/archer.json');
+    game.load.atlasJSONHash('critters', '../GameCore/Assets/Enemies/critters.png', '../GameCore/Assets/Enemies/critters.json');
+    game.load.atlasJSONHash('mage', '../GameCore/Assets/Enemies/mage.png', '../GameCore/Assets/Enemies/mage.json');
+    game.load.atlasJSONHash('mystic', '../GameCore/Assets/Enemies/mystic.png', '../GameCore/Assets/Enemies/mystic.json');
+    game.load.atlasJSONHash('warrior', '../GameCore/Assets/Enemies/warriors.png', '../GameCore/Assets/Enemies/warriors.json');
     game.load.tilemap('map', '../GameCore/Assets/Maps/Map1.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('jungle tileset', '../GameCore/Assets/Maps/jungle tileset.png');
 
@@ -106,9 +108,18 @@ function resetGame() {
 function handleCollisions() {
     // These collisions make the sprites collide with one another so they may not overlap
     game.physics.arcade.collide(gameWorld.player.sprite, gameWorld.layer);
-    game.physics.arcade.collide(gameWorld.enemies.group, gameWorld.layer);
+    game.physics.arcade.collide(gameWorld.warriors.group, gameWorld.layer);
+    game.physics.arcade.collide(gameWorld.critters.group, gameWorld.layer);
+    game.physics.arcade.collide(gameWorld.mages.group, gameWorld.layer);
+    game.physics.arcade.collide(gameWorld.archers.group, gameWorld.layer);
+    game.physics.arcade.collide(gameWorld.mystics.group, gameWorld.layer);
+
     // These collisions detect if sprites have overlapped and passes those sprites to a method to further handle the outcome
-    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.enemies.group, enemyPlayerCollision);
+    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.warriors.group, enemyPlayerCollision);
+    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.critters.group, enemyPlayerCollision);
+    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.mages.group, enemyPlayerCollision);
+    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.archers.group, enemyPlayerCollision);
+    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.mystics.group, enemyPlayerCollision);
 }
 
 function enemyPlayerCollision(player, enemy) {

@@ -5,7 +5,7 @@ function followPlayerControl(sprite) {
         if (gameWorld.player.sprite.x > sprite.x) {
             // Stop sprite action timer and raise x velocity to move to the right
             sprite.body.velocity.x = sprite.speed;
-            sprite.animations.play('run');
+            sprite.animations.play('move');
             sprite.facingLeft = false;
             sprite.fac1ingRight = true;
             sprite.scale.setTo(1, 1);
@@ -17,7 +17,7 @@ function followPlayerControl(sprite) {
         else {
             // Stop sprite action timer and lower x velocity to move to the left
             sprite.body.velocity.x = -sprite.speed;
-            sprite.animations.play('run');
+            sprite.animations.play('move');
             sprite.facingLeft = true;
             sprite.facingRight = false;
             sprite.scale.setTo(-1, 1);
@@ -79,6 +79,14 @@ function takeDamageControl(sprite) {
         sprite.following = false;
         sprite.animations.play('damaged');
         sprite.animations.currentAnim.onComplete.add(function () { sprite.takingDamage = false; sprite.following = true; }, this);
+    }
+}
+
+function rangedAttackControl(sprite) {
+    if (sprite.attacking) {
+        sprite.following = false;
+        sprite.animations.play('attack');
+        sprite.animations.currentAnim.onComplete.add(function () { sprite.attacking = false; sprite.cooldown = true; }, this);
     }
 }
 

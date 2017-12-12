@@ -7,18 +7,30 @@
         this.layer = this.map.createLayer('Tile Layer 1');
         this.map.visible = false;
         this.layer.visible = false;
-        this.enemies = new CollidableGroup(10, 'enemies', enemyFactory);
+        this.warriors = new CollidableGroup(10, 'warrior', meleeEnemyFactory);
+        this.archers = new CollidableGroup(10, 'archer', rangedEnemyFactory);
+        this.mages = new CollidableGroup(10, 'mage', rangedEnemyFactory);
+        this.mystics = new CollidableGroup(10, 'mystic', meleeEnemyFactory);
+        this.critters = new CollidableGroup(10, 'critters', critterEnemyFactory);
         console.log("GameWorld Instantiated.");
     }
 
     update() {
         this.player.update();
-        this.enemies.updateGroup();
+        this.warriors.updateGroup();
+        this.archers.updateGroup();
+        this.mages.updateGroup();
+        this.mystics.updateGroup();
+        this.critters.updateGroup();
         this.paralex.forEach(sprite => sprite.update(sprite));
     }
 
     cleanup() {
-        this.enemies.destroyGroup();
+        this.warriors.destroyGroup();
+        this.archers.destroyGroup();
+        this.mages.destroyGroup();
+        this.mystics.destroyGroup();
+        this.critters.destroyGroup();
         this.paralex.forEach(sprite => sprite.kill());
     }
 
@@ -52,28 +64,97 @@
         if (game.enemiesAlive == 0) {
             game.enemySpawnTimer.start();
         }
-
         if (game.enemySpawnTimer.seconds > 1) {
-            game.enemySpawnTimer.stop();
             var spawnLocation = game.rnd.integerInRange(1, 2);
+            var x = 0;
+            var y = 450;
             if (spawnLocation == 1) {
-                this.enemies.createEnemy(10, 500, 1, 1);
+                x = 10;
             }
             else {
-                this.enemies.createEnemy(2350, 500, 1, 1);
+                x = 2350
             }
-            game.enemiesAlive++;
-            game.difficulty--;
-            game.enemySpawnTimer.start();
+
+            var enemyType = game.rnd.integerInRange(1, 6);
+
+            switch (enemyType) {
+                case 1: {
+                    this.warriors.createEnemy(x, y, "Warrior");
+                    game.enemySpawnTimer.stop();
+                    game.enemiesAlive++;
+                    game.difficulty--;
+                    game.enemySpawnTimer.start();
+                    break;
+                }
+                case 2: {
+                    this.archers.createEnemy(x, y, "Archer");
+                    game.enemySpawnTimer.stop();
+                    game.enemiesAlive++;
+                    game.difficulty--;
+                    game.enemySpawnTimer.start();
+                    break;
+                }
+                case 3: {
+                    this.mages.createEnemy(x, y, "Mage");
+                    game.enemySpawnTimer.stop();
+                    game.enemiesAlive++;
+                    game.difficulty--;
+                    game.enemySpawnTimer.start();
+                    break;
+                }
+                case 4: {
+                    this.mystics.createEnemy(x, y, "Mystic");
+                    game.enemySpawnTimer.stop();
+                    game.enemiesAlive++;
+                    game.difficulty--;
+                    game.enemySpawnTimer.start();
+                    break;
+                }
+                case 5: {
+                    this.critters.createEnemy(x, y, "Critter1");
+                    game.enemySpawnTimer.stop();
+                    game.enemiesAlive++;
+                    game.difficulty--;
+                    game.enemySpawnTimer.start();
+                    break;
+                }
+                case 6: {
+                    this.critters.createEnemy(x, y, "Critter2");
+                    game.enemySpawnTimer.stop();
+                    game.enemiesAlive++;
+                    game.difficulty--;
+                    game.enemySpawnTimer.start();
+                    break;
+                }
+            }
         }
     }
-
 }
 
-function enemyFactory(sprite) {
+function meleeEnemyFactory(sprite) {
     sprite.entity = new Entity();
     sprite.entity.addControl(followPlayerControl);
     sprite.entity.addControl(attackControl);
+    sprite.entity.addControl(cooldownControl);
+    sprite.entity.addControl(deathControl);
+    sprite.entity.addControl(takeDamageControl);
+    sprite.entity.addControl(xGravityControl);
+};
+
+function rangedEnemyFactory(sprite) {
+    sprite.entity = new Entity();
+    sprite.entity.addControl(followPlayerControl);
+    sprite.entity.addControl(rangedAttackControl);
+    sprite.entity.addControl(cooldownControl);
+    sprite.entity.addControl(deathControl);
+    sprite.entity.addControl(takeDamageControl);
+    sprite.entity.addControl(xGravityControl);
+};
+
+function critterEnemyFactory(sprite) {
+    sprite.entity = new Entity();
+    sprite.entity.addControl(followPlayerControl);
+    sprite.entity.addControl(jumpAttackControl);
     sprite.entity.addControl(cooldownControl);
     sprite.entity.addControl(deathControl);
     sprite.entity.addControl(takeDamageControl);

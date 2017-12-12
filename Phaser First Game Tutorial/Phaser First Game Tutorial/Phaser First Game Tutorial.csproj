@@ -154,9 +154,11 @@
     <Content Include="GameCore\Assets\Backgrounds\Paralex3.png" />
     <Content Include="GameCore\Assets\Backgrounds\Paralex4.png" />
     <Content Include="GameCore\Assets\Backgrounds\Paralex5.png" />
-    <Content Include="GameCore\Assets\Enemies\baddie.png" />
-    <Content Include="GameCore\Assets\Collectibles\diamond.png" />
-    <Content Include="GameCore\Assets\Enemies\enemies.png" />
+    <Content Include="GameCore\Assets\Enemies\archer.png" />
+    <Content Include="GameCore\Assets\Enemies\critters.png" />
+    <Content Include="GameCore\Assets\Enemies\mage.png" />
+    <Content Include="GameCore\Assets\Enemies\mystic.png" />
+    <Content Include="GameCore\Assets\Enemies\warriors.png" />
     <Content Include="GameCore\Assets\HUD\AttackButton.png" />
     <Content Include="GameCore\Assets\HUD\HealthBar.png" />
     <Content Include="GameCore\Assets\HUD\HealthBarLine.png" />
@@ -166,9 +168,7 @@
     <Content Include="GameCore\Assets\HUD\RightButton.png" />
     <Content Include="GameCore\Assets\Maps\jungle tileset.png" />
     <Content Include="GameCore\Assets\Player\player.png" />
-    <Content Include="GameCore\Assets\Collectibles\firstaid.png" />
     <Content Include="GameCore\Assets\Screens\SplashScreen.png" />
-    <Content Include="GameCore\Assets\Collectibles\star.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -187,8 +187,12 @@
     <Content Include="GameCore\js\GameController.js" />
     <Content Include="GameCore\js\Player.js" />
     <Content Include="GameCore\Assets\Player\player.json" />
-    <Content Include="GameCore\Assets\Enemies\enemies.json" />
     <Content Include="GameCore\Assets\Maps\Map1.json" />
+    <Content Include="GameCore\Assets\Enemies\archer.json" />
+    <Content Include="GameCore\Assets\Enemies\critters.json" />
+    <Content Include="GameCore\Assets\Enemies\mage.json" />
+    <Content Include="GameCore\Assets\Enemies\mystic.json" />
+    <Content Include="GameCore\Assets\Enemies\warriors.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -221,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="GameCore\Assets\Collectibles\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
