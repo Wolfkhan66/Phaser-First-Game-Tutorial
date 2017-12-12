@@ -16,6 +16,9 @@
         this.createText('WaveHelperText', 'InGameUI', 270, (game.height / 2) - 100, 'Prepare Yourself!', 40, null);
         this.createText('Score', 'InGameUI', 660, 2, 'Score: 0', 20, null);
 
+        // TimeAttackUI
+        this.createText('Timer', 'TimeAttackUI', 380, 50, '90', 40, null);
+
         // MainMenuUI \\
         this.createSprite('SplashScreen', 'MainMenuUI', 0, 0, 800, 600, 'SplashScreen', null, null);
         this.createText('NewGameText', 'MainMenuUI', (game.width / 2) - 34, (game.height / 2), 'New Game', 25, function () { sceneManager("DifficultySelect") });
@@ -23,21 +26,28 @@
 
         // DifficultySelectUI \\
         this.createSprite('SplashScreen', 'DifficultySelectUI', 0, 0, 800, 600, 'SplashScreen', null, null);
-        this.createText('Easy', 'DifficultySelectUI', (game.width / 2) - 34, (game.height / 2), 'Easy', 25, function () { game.difficultyLevel = 1; sceneManager("MapSelect"); });
-        this.createText('Normal', 'DifficultySelectUI', (game.width / 2) - 34, (game.height / 2) + 30, 'Normal', 25, function () { game.difficultyLevel = 2; sceneManager("MapSelect"); });
-        this.createText('Hard', 'DifficultySelectUI', (game.width / 2) - 34, (game.height / 2) + 60, 'Hard', 25, function () { game.difficultyLevel = 3; sceneManager("MapSelect"); });
+        this.createText('Easy', 'DifficultySelectUI', (game.width / 2) - 34, (game.height / 2), 'Easy', 25, function () { game.difficultyLevel = 1; sceneManager("ModeSelect"); });
+        this.createText('Normal', 'DifficultySelectUI', (game.width / 2) - 34, (game.height / 2) + 30, 'Normal', 25, function () { game.difficultyLevel = 2; sceneManager("ModeSelect"); });
+        this.createText('Hard', 'DifficultySelectUI', (game.width / 2) - 34, (game.height / 2) + 60, 'Hard', 25, function () { game.difficultyLevel = 3; sceneManager("ModeSelect"); });
         this.createText('BackFromDifficultySelect', 'DifficultySelectUI', (game.width / 2) - 34, (game.height / 2) + 120, 'Back', 25, function () { sceneManager("Menu"); });
+
+        // ModeSelectUI \\
+        this.createSprite('SplashScreen', 'ModeSelectUI', 0, 0, 800, 600, 'SplashScreen', null, null);
+        this.createText('Classic', 'ModeSelectUI', (game.width / 2) - 34, (game.height / 2), 'Classic', 25, function () { game.gameMode = "Classic"; sceneManager("MapSelect"); });
+        this.createText('TimeAttack', 'ModeSelectUI', (game.width / 2) - 34, (game.height / 2) + 30, 'Time Attack', 25, function () { game.gameMode = "TimeAttack"; sceneManager("MapSelect"); });
+        this.createText('Survival', 'ModeSelectUI', (game.width / 2) - 34, (game.height / 2) + 60, 'Survival', 25, function () { game.gameMode = "Survival"; sceneManager("MapSelect"); });
+        this.createText('BackFromModeSelect', 'ModeSelectUI', (game.width / 2) - 34, (game.height / 2) + 120, 'Back', 25, function () { sceneManager("DifficultySelect"); });
 
         // MapSelectUI \\
         this.createSprite('SplashScreen', 'MapSelectUI', 0, 0, 800, 600, 'SplashScreen', null, null);
         this.createText('Map1', 'MapSelectUI', (game.width / 2) - 34, (game.height / 2), 'Map 1', 25, function () { sceneManager("Map1") });
         this.createText('Map2', 'MapSelectUI', (game.width / 2) - 34, (game.height / 2) + 30, 'Map 2', 25, function () { sceneManager("Map2") });
-        this.createText('BackFromMapSelect', 'MapSelectUI', (game.width / 2) - 34, (game.height / 2) + 90, 'Back', 25, function () { sceneManager("DifficultySelect") });
+        this.createText('BackFromMapSelect', 'MapSelectUI', (game.width / 2) - 34, (game.height / 2) + 90, 'Back', 25, function () { sceneManager("ModeSelect") });
 
         // GameOverUI \\
         this.createSprite('SplashScreen', 'GameOverUI', 0, 0, 800, 600, 'SplashScreen', null, null);
         this.createText('GameOver', 'GameOverUI', (game.width / 5), (game.height / 4), 'Game Over', 100, null);
-        this.createText('TryAgain?', 'GameOverUI', (game.width / 2) - 44, (game.height / 2), 'Try Again?', 25, function () { sceneManager("DifficultySelect") });
+        this.createText('Continue?', 'GameOverUI', (game.width / 2) - 44, (game.height / 2), 'Continue?', 25, function () { sceneManager("Menu") });
     }
 
     createText(Name, UI, x, y, string, size, event) {
@@ -72,8 +82,8 @@
     }
 
     showUI(UIType) {
-        this.textObjects.forEach(function (object) { if (object.UI == UIType) object.Text.visible = true; });
-        this.sprites.forEach(function (object) { if (object.UI == UIType) object.Sprite.visible = true; });
+        this.textObjects.forEach(function (object) { if (object.UI == UIType) { object.Text.visible = true; } });
+        this.sprites.forEach(function (object) { if (object.UI == UIType) { object.Sprite.visible = true; } });
     }
 
     hideAll() {
@@ -82,11 +92,15 @@
     }
 
     setText(name, value) {
-        this.textObjects.forEach(function (object) { if (object.Name == name) object.Text.text = value });
+        this.textObjects.forEach(function (object) { if (object.Name == name) { object.Text.text = value; } });
+    }
+
+    setTextPosition(name, x, y) {
+        this.textObjects.forEach(function (object) { if (object.Name == name) {object.Text.cameraOffset.setTo(x, y); } });
     }
 
     setPlayerHealth(health) {
-        this.sprites.forEach(function (object) { if (object.Name == "HealthBar") object.Sprite.width = health });
+        this.sprites.forEach(function (object) { if (object.Name == "HealthBar") { object.Sprite.width = health; } });
     }
 
 }

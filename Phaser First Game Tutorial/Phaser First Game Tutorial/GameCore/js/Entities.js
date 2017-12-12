@@ -48,7 +48,7 @@ class CollidableGroup {
             enemy.animations.add('damaged', ['Test/damaged.png', 'Test/damaged.png'], 2, false);
             enemy.body.bounce.y = 0.3;
             enemy.timer = game.time.create(false);
-            enemy.health = 100;
+            enemy.health = 50;
             enemy.range = game.rnd.integerInRange(20, 80);
             enemy.speed = game.rnd.integerInRange(30, 100);
             enemy.damage = game.rnd.integerInRange(4, 6);

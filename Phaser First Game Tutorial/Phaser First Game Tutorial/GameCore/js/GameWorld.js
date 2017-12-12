@@ -47,6 +47,27 @@
             this.paralex.push(sprite);
         }
     }
+
+    createEnemy() {
+        if (game.enemiesAlive == 0) {
+            game.enemySpawnTimer.start();
+        }
+
+        if (game.enemySpawnTimer.seconds > 1) {
+            game.enemySpawnTimer.stop();
+            var spawnLocation = game.rnd.integerInRange(1, 2);
+            if (spawnLocation == 1) {
+                this.enemies.createEnemy(10, 500, 1, 1);
+            }
+            else {
+                this.enemies.createEnemy(2350, 500, 1, 1);
+            }
+            game.enemiesAlive++;
+            game.difficulty--;
+            game.enemySpawnTimer.start();
+        }
+    }
+
 }
 
 function enemyFactory(sprite) {

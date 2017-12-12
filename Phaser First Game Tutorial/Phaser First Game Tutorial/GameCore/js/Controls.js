@@ -62,10 +62,13 @@ function cooldownControl(sprite) {
 
 function deathControl(sprite) {
     if (sprite.health <= 0) {
-        game.score += 10;
+        game.score += (10 * game.difficultyLevel);
         ui.setText("Score", "Score: " + game.score);
         sprite.kill();
         game.enemiesAlive--;
+        if (game.gameMode == "TimeAttack") {
+            game.countDown = game.countDown + 5;
+        }
     }
 }
 

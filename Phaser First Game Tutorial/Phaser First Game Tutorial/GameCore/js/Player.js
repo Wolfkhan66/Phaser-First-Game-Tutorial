@@ -5,7 +5,7 @@
         const playerSprite = game.add.sprite(0, 0, 'player', 'idle.png');
         game.physics.arcade.enable(playerSprite);
         playerSprite.anchor.setTo(0.5, 0.5);
-        playerSprite.body.gravity.y = 500;
+        playerSprite.body.gravity.y = 600;
         playerSprite.body.collideWorldBounds = true;
         playerSprite.animations.add('idle', ['idle.png', 'idle.png'], 5, true);
         playerSprite.animations.add('jump', ['jump.png', 'idle.png'], 1.5, false);
@@ -113,7 +113,6 @@
     }
 
     moveRight() {
-        console.log("Moving Right -->")
         this.sprite.body.velocity.x = 150;
         if (!this.sprite.jumping) {
             this.sprite.animations.play('run');
@@ -164,7 +163,7 @@
             this.sprite.jumping = true;
             this.sprite.animations.play('jump');
             this.sprite.animations.currentAnim.onComplete.add(function () { this.sprite.jumping = false; }, this);
-            this.sprite.body.velocity.y = -400;
+            this.sprite.body.velocity.y = -500;
         }
     }
 
