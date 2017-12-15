@@ -32,7 +32,7 @@ class CollidableGroup {
         this.group = group;
     }
 
-    createPotion(x, y, velocityY)    {
+    createPotion(x, y, velocityY) {
         const potion = this.group.getFirstExists(false);
         if (potion) {
             potion.body.collideWorldBounds = true;
@@ -129,50 +129,50 @@ class CollidableGroup {
     setStats(enemy, Type) {
         switch (Type) {
             case "Warrior": {
-                enemy.health = 50;
+                enemy.health = 50 * (game.difficultyLevel / 2);
                 enemy.range = game.rnd.integerInRange(60, 80);
                 enemy.speed = game.rnd.integerInRange(50, 100);
-                enemy.damage = game.rnd.integerInRange(5, 10);
+                enemy.damage = game.rnd.integerInRange(5, 10) * (game.difficultyLevel / 2);
                 enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
                 break;
             }
             case "Archer": {
-                enemy.health = 25;
+                enemy.health = 25 * (game.difficultyLevel / 2);
                 enemy.range = game.rnd.integerInRange(300, 350);
                 enemy.speed = game.rnd.integerInRange(30, 100);
-                enemy.damage = game.rnd.integerInRange(2, 4);
+                enemy.damage = game.rnd.integerInRange(2, 4) * (game.difficultyLevel / 2);
                 enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
                 break;
             }
             case "Mage": {
-                enemy.health = 15;
+                enemy.health = 15 * (game.difficultyLevel / 2);
                 enemy.range = game.rnd.integerInRange(250, 300);
                 enemy.speed = game.rnd.integerInRange(30, 100);
-                enemy.damage = game.rnd.integerInRange(4, 6);
+                enemy.damage = game.rnd.integerInRange(4, 6) * (game.difficultyLevel / 2);
                 enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
                 break;
             }
             case "Mystic": {
-                enemy.health = 100;
+                enemy.health = 100 * (game.difficultyLevel / 2);
                 enemy.range = game.rnd.integerInRange(20, 80);
                 enemy.speed = game.rnd.integerInRange(30, 100);
-                enemy.damage = game.rnd.integerInRange(4, 6);
+                enemy.damage = game.rnd.integerInRange(4, 6) * (game.difficultyLevel / 2);
                 enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
                 break;
             }
             case "Critter1": {
-                enemy.health = 20;
+                enemy.health = 20 * (game.difficultyLevel / 2);
                 enemy.range = game.rnd.integerInRange(20, 80);
                 enemy.speed = game.rnd.integerInRange(50, 100);
-                enemy.damage = game.rnd.integerInRange(1, 2);
+                enemy.damage = game.rnd.integerInRange(1, 2) * (game.difficultyLevel / 2);
                 enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
                 break;
             }
             case "Critter2": {
-                enemy.health = 20;
+                enemy.health = 20 * (game.difficultyLevel / 2);
                 enemy.range = game.rnd.integerInRange(20, 80);
                 enemy.speed = game.rnd.integerInRange(50, 100);
-                enemy.damage = game.rnd.integerInRange(1, 2);
+                enemy.damage = game.rnd.integerInRange(1, 2) * (game.difficultyLevel / 2);
                 enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
                 break;
             }
