@@ -169,6 +169,7 @@
     <Content Include="GameCore\Assets\HUD\RightButton.png" />
     <Content Include="GameCore\Assets\Maps\jungle tileset.png" />
     <Content Include="GameCore\Assets\Player\player.png" />
+    <Content Include="GameCore\Assets\Projectiles\arrow.png" />
     <Content Include="GameCore\Assets\Screens\SplashScreen.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />

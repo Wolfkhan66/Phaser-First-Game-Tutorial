@@ -45,6 +45,17 @@ class CollidableGroup {
         }
     }
 
+    createArrow(x, y, velocityX) {
+        const arrow = this.group.getFirstExists(false);
+        if (arrow) {
+            arrow.reset(x, y);
+            arrow.body.velocity.x = velocityX;
+            arrow.body.gravity.y = 200;
+            arrow.body.bounce.y = 0.5;
+            arrow.damage = game.rnd.integerInRange(5, 10);
+        }
+    }
+
     createEnemy(x, y, Type) {
         console.log("Creating enemy");
         // get the first sprite in the group that is not in use
@@ -53,7 +64,7 @@ class CollidableGroup {
             enemy.body.collideWorldBounds = true;
             enemy.reset(x, y);
             enemy.body.gravity.y = 500;
-            //enemy.anchor.setTo(0.5, 0.5);
+            enemy.anchor.setTo(0.5, 0.5);
             enemy.body.bounce.y = 0.3;
             enemy.timer = game.time.create(false);
             enemy.facingLeft = false;
@@ -64,6 +75,7 @@ class CollidableGroup {
             enemy.chargingAttack = false;
             enemy.following = true;
             enemy.takingDamage = false;
+            enemy.playerYTimer = game.time.create(false);
             this.setAnimations(enemy, Type);
             this.setStats(enemy, Type);
         }

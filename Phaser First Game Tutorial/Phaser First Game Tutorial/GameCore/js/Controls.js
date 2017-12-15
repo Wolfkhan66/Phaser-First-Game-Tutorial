@@ -29,12 +29,12 @@
 }
 
 function followPlayerYControl(sprite) {
-        if (gameWorld.player.sprite.y > sprite.y) {
-            sprite.body.velocity.y = sprite.speed;
-        }
-        else {
-            sprite.body.velocity.y = -sprite.speed;
-        }
+    if (gameWorld.player.sprite.y > sprite.y) {
+        sprite.body.velocity.y = sprite.speed;
+    }
+    else {
+        sprite.body.velocity.y = -sprite.speed;
+    }
 }
 
 function xGravityControl(sprite) {
@@ -70,8 +70,15 @@ function rangedAttackControl(sprite) {
     if (sprite.attacking) {
         sprite.following = false;
         sprite.animations.play('attack');
-        sprite.animations.currentAnim.onComplete.add(function () { sprite.attacking = false; sprite.cooldown = true; }, this);
-         // TODO create ranged projectile of some kind that moves in players current direction
+        sprite.animations.currentAnim.onComplete.add(function () { sprite.cooldown = true; }, this);
+
+        if (sprite.facingLeft) {
+            gameWorld.projectiles.createArrow(sprite.x, sprite.y - 20, -350)
+        }
+        else {
+            gameWorld.projectiles.createArrow(sprite.x, sprite.y - 20, 350)
+        }
+        sprite.attacking = false
     }
 }
 
@@ -136,6 +143,15 @@ function timeOutControl(sprite) {
         sprite.alive = true;
     }
     if (sprite.timer.seconds > 10) {
+        sprite.kill();
+    }
+}
+
+function destroyOutOfBoundsControl(sprite) {
+    if (sprite.x < 0 || sprite.x > 2400) {
+        sprite.kill();
+    }
+    if (sprite.y > 800) {
         sprite.kill();
     }
 }

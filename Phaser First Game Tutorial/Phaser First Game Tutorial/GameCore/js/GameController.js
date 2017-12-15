@@ -46,6 +46,7 @@ function preload() {
     game.load.tilemap('map2', '../GameCore/Assets/Maps/Map2.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('jungle tileset', '../GameCore/Assets/Maps/jungle tileset.png');
     game.load.image('healthPotion', '../GameCore/Assets/Collectibles/health.png');
+    game.load.image('arrow', '../GameCore/Assets/Projectiles/arrow.png');
 
     console.log("Assets Loaded.");
 }
@@ -124,7 +125,15 @@ function handleCollisions() {
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.archers.group, enemyPlayerCollision);
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.mystics.group, enemyPlayerCollision);
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.potions.group, potionCollision);
+    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.projectiles.group, projectileCollision);
 }
+
+function projectileCollision(player, projectile) {
+    player.health -= projectile.damage;
+    projectile.kill();
+    ui.setPlayerHealth(player.health);
+}
+
 
 function potionCollision(player, potion) {
     if (player.health < 100) {

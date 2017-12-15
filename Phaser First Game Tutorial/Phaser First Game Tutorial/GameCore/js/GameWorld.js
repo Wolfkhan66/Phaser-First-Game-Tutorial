@@ -13,6 +13,7 @@
         this.mystics = new CollidableGroup(10, 'mystic', mysticFactory);
         this.critters = new CollidableGroup(10, 'critters', crittersFactory);
         this.potions = new CollidableGroup(3, 'healthPotion', potionFactory);
+        this.projectiles = new CollidableGroup(10, 'arrow', projectileFactory);
         console.log("GameWorld Instantiated.");
     }
 
@@ -24,6 +25,7 @@
         this.mystics.updateGroup();
         this.critters.updateGroup();
         this.potions.updateGroup();
+        this.projectiles.updateGroup();
         this.paralex.forEach(sprite => sprite.update(sprite));
     }
 
@@ -34,6 +36,7 @@
         this.mystics.destroyGroup();
         this.critters.destroyGroup();
         this.potions.destroyGroup();
+        this.projectiles.destroyGroup();
         this.paralex.forEach(sprite => sprite.kill());
     }
 
@@ -134,6 +137,11 @@
     }
 }
 
+function projectileFactory(sprite) {
+    sprite.entity = new Entity();
+    sprite.entity.addControl(destroyOutOfBoundsControl);
+}
+
 function potionFactory(sprite) {
     sprite.entity = new Entity();
     sprite.entity.addControl(timeOutControl);
@@ -155,7 +163,7 @@ function archerFactory(sprite) {
     sprite.entity = new Entity();
     sprite.entity.addControl(followPlayerXControl);
     sprite.entity.addControl(followPlayerYControl);
-    sprite.entity.addControl(attackControl);
+    sprite.entity.addControl(rangedAttackControl);
     sprite.entity.addControl(chargingAttackControl);
     sprite.entity.addControl(cooldownControl);
     sprite.entity.addControl(deathControl);
@@ -167,7 +175,7 @@ function mageFactory(sprite) {
     sprite.entity = new Entity();
     sprite.entity.addControl(followPlayerXControl);
     sprite.entity.addControl(followPlayerYControl);
-    sprite.entity.addControl(attackControl);
+    sprite.entity.addControl(rangedAttackControl);
     sprite.entity.addControl(chargingAttackControl);
     sprite.entity.addControl(cooldownControl);
     sprite.entity.addControl(deathControl);
