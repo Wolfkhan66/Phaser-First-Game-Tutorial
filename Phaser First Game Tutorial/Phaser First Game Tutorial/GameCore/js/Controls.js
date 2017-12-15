@@ -118,10 +118,24 @@ function deathControl(sprite) {
     if (sprite.health <= 0) {
         game.score += (10 * game.difficultyLevel);
         ui.setText("Score", "Score: " + game.score);
-        sprite.kill();
-        game.enemiesAlive--;
         if (game.gameMode == "TimeAttack") {
             game.countDown = game.countDown + 5;
         }
+        var potionSpawnChance = game.rnd.integerInRange(1, 20);
+        if (potionSpawnChance == 10) {
+            gameWorld.potions.createPotion(sprite.x, sprite.y, 300)
+        }
+        sprite.kill();
+        game.enemiesAlive--;
+    }
+}
+
+function timeOutControl(sprite) {
+    if (!sprite.alive) {
+        sprite.timer.start();
+        sprite.alive = true;
+    }
+    if (sprite.timer.seconds > 10) {
+        sprite.kill();
     }
 }

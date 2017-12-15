@@ -32,6 +32,19 @@ class CollidableGroup {
         this.group = group;
     }
 
+    createPotion(x, y, velocityY)    {
+        const potion = this.group.getFirstExists(false);
+        if (potion) {
+            potion.body.collideWorldBounds = true;
+            potion.reset(x, y);
+            potion.body.velocity.y = velocityY;
+            potion.body.gravity.y = 500;
+            potion.body.bounce.y = 0.5;
+            potion.timer = game.time.create(false);
+            potion.alive = false;
+        }
+    }
+
     createEnemy(x, y, Type) {
         console.log("Creating enemy");
         // get the first sprite in the group that is not in use

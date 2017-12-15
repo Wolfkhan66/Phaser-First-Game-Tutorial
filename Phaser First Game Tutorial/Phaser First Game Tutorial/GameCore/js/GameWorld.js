@@ -3,7 +3,7 @@
         game.physics.startSystem(Phaser.Physics.ARCADE);
         this.player = new Player();
         this.paralex = [];
-        this.map = game.add.tilemap('map');
+        this.map = game.add.tilemap('map1');
         this.layer = this.map.createLayer('Tile Layer 1');
         this.map.visible = false;
         this.layer.visible = false;
@@ -12,6 +12,7 @@
         this.mages = new CollidableGroup(10, 'mage', mageFactory);
         this.mystics = new CollidableGroup(10, 'mystic', mysticFactory);
         this.critters = new CollidableGroup(10, 'critters', crittersFactory);
+        this.potions = new CollidableGroup(3, 'healthPotion', potionFactory);
         console.log("GameWorld Instantiated.");
     }
 
@@ -22,6 +23,7 @@
         this.mages.updateGroup();
         this.mystics.updateGroup();
         this.critters.updateGroup();
+        this.potions.updateGroup();
         this.paralex.forEach(sprite => sprite.update(sprite));
     }
 
@@ -31,11 +33,12 @@
         this.mages.destroyGroup();
         this.mystics.destroyGroup();
         this.critters.destroyGroup();
+        this.potions.destroyGroup();
         this.paralex.forEach(sprite => sprite.kill());
     }
 
-    createMap1() {
-        this.map = game.add.tilemap('map');
+    createMap(tilemap) {
+        this.map = game.add.tilemap(tilemap);
         this.map.addTilesetImage('jungle tileset');
         this.map.setCollisionBetween(41, 82, 120);
         this.layer = this.map.createLayer('Tile Layer 1');
@@ -129,6 +132,11 @@
             }
         }
     }
+}
+
+function potionFactory(sprite) {
+    sprite.entity = new Entity();
+    sprite.entity.addControl(timeOutControl);
 }
 
 function warriorFactory(sprite) {

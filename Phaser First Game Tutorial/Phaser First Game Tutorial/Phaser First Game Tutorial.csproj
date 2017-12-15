@@ -154,6 +154,7 @@
     <Content Include="GameCore\Assets\Backgrounds\Paralex3.png" />
     <Content Include="GameCore\Assets\Backgrounds\Paralex4.png" />
     <Content Include="GameCore\Assets\Backgrounds\Paralex5.png" />
+    <Content Include="GameCore\Assets\Collectibles\health.png" />
     <Content Include="GameCore\Assets\Enemies\archer.png" />
     <Content Include="GameCore\Assets\Enemies\critters.png" />
     <Content Include="GameCore\Assets\Enemies\mage.png" />
@@ -226,7 +227,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="GameCore\Assets\Collectibles\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

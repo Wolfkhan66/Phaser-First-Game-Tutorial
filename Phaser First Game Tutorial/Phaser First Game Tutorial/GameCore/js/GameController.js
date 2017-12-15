@@ -42,8 +42,10 @@ function preload() {
     game.load.atlasJSONHash('mage', '../GameCore/Assets/Enemies/mage.png', '../GameCore/Assets/Enemies/mage.json');
     game.load.atlasJSONHash('mystic', '../GameCore/Assets/Enemies/mystic.png', '../GameCore/Assets/Enemies/mystic.json');
     game.load.atlasJSONHash('warrior', '../GameCore/Assets/Enemies/warriors.png', '../GameCore/Assets/Enemies/warriors.json');
-    game.load.tilemap('map', '../GameCore/Assets/Maps/Map1.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('map1', '../GameCore/Assets/Maps/Map1.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('map2', '../GameCore/Assets/Maps/Map2.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('jungle tileset', '../GameCore/Assets/Maps/jungle tileset.png');
+    game.load.image('healthPotion', '../GameCore/Assets/Collectibles/health.png');
 
     console.log("Assets Loaded.");
 }
@@ -113,6 +115,7 @@ function handleCollisions() {
     game.physics.arcade.collide(gameWorld.mages.group, gameWorld.layer);
     game.physics.arcade.collide(gameWorld.archers.group, gameWorld.layer);
     game.physics.arcade.collide(gameWorld.mystics.group, gameWorld.layer);
+    game.physics.arcade.collide(gameWorld.potions.group, gameWorld.layer);
 
     // These collisions detect if sprites have overlapped and passes those sprites to a method to further handle the outcome
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.warriors.group, enemyPlayerCollision);
@@ -120,6 +123,16 @@ function handleCollisions() {
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.mages.group, enemyPlayerCollision);
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.archers.group, enemyPlayerCollision);
     game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.mystics.group, enemyPlayerCollision);
+    game.physics.arcade.overlap(gameWorld.player.sprite, gameWorld.potions.group, potionCollision);
+}
+
+function potionCollision(player, potion) {
+    if (player.health < 100) {
+        potion.kill();
+        player.health += 10;
+        if (player.health > 100) { player.health = 100; }
+        ui.setPlayerHealth(player.health);
+    }
 }
 
 function enemyPlayerCollision(player, enemy) {
@@ -176,13 +189,14 @@ function sceneManager(scene) {
             ui.showUI("InGameUI");
             gameWorld.player.sprite.visible = true;
             gameWorld.player.setPlayerPosition(1200, game.height / 2);
-            gameWorld.createMap1();
+            gameWorld.createMap("map1");
             break;
         }
         case "Map2": {
             ui.showUI("InGameUI");
             gameWorld.player.sprite.visible = true;
-            gameWorld.player.setPlayerPosition(game.width / 2, game.height / 2);
+            gameWorld.player.setPlayerPosition(1200, game.height / 2);
+            gameWorld.createMap("map2");
             break;
         }
     }
