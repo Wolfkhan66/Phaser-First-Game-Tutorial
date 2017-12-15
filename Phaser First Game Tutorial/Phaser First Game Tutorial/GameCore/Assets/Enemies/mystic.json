@@ -2,7 +2,7 @@
 
 "attack1.png":
 {
-	"frame": {"x":0,"y":0,"w":40,"h":78},
+	"frame": {"x":0,"y":81,"w":40,"h":78},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":78},
@@ -10,15 +10,23 @@
 },
 "attack2.png":
 {
-	"frame": {"x":40,"y":0,"w":80,"h":78},
+	"frame": {"x":0,"y":164,"w":80,"h":78},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":78},
 	"sourceSize": {"w":80,"h":78}
 },
+"damaged.png":
+{
+	"frame": {"x":31,"y":0,"w":31,"h":79},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":79},
+	"sourceSize": {"w":31,"h":79}
+},
 "idle.png":
 {
-	"frame": {"x":120,"y":0,"w":31,"h":79},
+	"frame": {"x":0,"y":0,"w":31,"h":79},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":79},
@@ -26,7 +34,7 @@
 },
 "moving1.png":
 {
-	"frame": {"x":151,"y":0,"w":41,"h":83},
+	"frame": {"x":40,"y":81,"w":41,"h":83},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":41,"h":83},
@@ -34,7 +42,7 @@
 },
 "moving2.png":
 {
-	"frame": {"x":192,"y":0,"w":34,"h":81},
+	"frame": {"x":62,"y":0,"w":34,"h":81},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":34,"h":81},
@@ -45,8 +53,8 @@
 	"version": "1.0",
 	"image": "mystic.png",
 	"format": "RGBA8888",
-	"size": {"w":226,"h":83},
+	"size": {"w":96,"h":242},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:bdead9ad01faa3a325eac5eef780bd3f:614d03179d5cb2b8f935f72af3657b21:1f1a9ee14b178304c51a4af05b360ef3$"
+	"smartupdate": "$TexturePacker:SmartUpdate:47283a4aefe30d13f023f441a1362949:0cc89aa64308c723e3d4b0358350926a:1f1a9ee14b178304c51a4af05b360ef3$"
 }
 }

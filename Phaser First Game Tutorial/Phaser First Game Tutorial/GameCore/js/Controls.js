@@ -119,7 +119,7 @@ function deathControl(sprite) {
         game.score += (10 * game.difficultyLevel);
         ui.setText("Score", "Score: " + game.score);
         if (game.gameMode == "TimeAttack") {
-            game.countDown = game.countDown + 5;
+            game.countDown = game.countDown + 2;
         }
         var potionSpawnChance = game.rnd.integerInRange(1, 20);
         if (potionSpawnChance == 10) {

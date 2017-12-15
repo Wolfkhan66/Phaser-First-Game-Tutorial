@@ -13,7 +13,7 @@
         playerSprite.animations.add('attack1', ['attack1.png', 'attack2.png'], 6, false);
         playerSprite.animations.add('attack2', ['attack3.png', 'attack4.png'], 6, false);
         playerSprite.animations.add('attack3', ['attack5.png', 'attack6.png', 'attack7.png', 'attack8.png'], 7, false);
-        playerSprite.animations.add('damaged', ['damaged.png'], 5, false);
+        playerSprite.animations.add('damaged', ['damaged1.png', 'damaged2.png'], 5, false);
         playerSprite.health = 100;
         playerSprite.damage = 2;
         playerSprite.takingDamage = false;

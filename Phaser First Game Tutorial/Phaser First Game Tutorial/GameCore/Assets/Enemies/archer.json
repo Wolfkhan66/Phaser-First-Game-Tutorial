@@ -16,7 +16,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":65,"h":65},
 	"sourceSize": {"w":65,"h":65}
 },
-"damaged.png":
+"damaged1.png":
 {
 	"frame": {"x":130,"y":0,"w":46,"h":68},
 	"rotated": false,
@@ -24,9 +24,17 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":68},
 	"sourceSize": {"w":46,"h":68}
 },
+"damaged2.png":
+{
+	"frame": {"x":176,"y":0,"w":46,"h":68},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":68},
+	"sourceSize": {"w":46,"h":68}
+},
 "idle.png":
 {
-	"frame": {"x":176,"y":0,"w":53,"h":67},
+	"frame": {"x":222,"y":0,"w":53,"h":67},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":53,"h":67},
@@ -34,7 +42,7 @@
 },
 "moving1.png":
 {
-	"frame": {"x":229,"y":0,"w":53,"h":67},
+	"frame": {"x":275,"y":0,"w":53,"h":67},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":53,"h":67},
@@ -42,7 +50,7 @@
 },
 "moving2.png":
 {
-	"frame": {"x":282,"y":0,"w":53,"h":67},
+	"frame": {"x":328,"y":0,"w":53,"h":67},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":53,"h":67},
@@ -53,8 +61,8 @@
 	"version": "1.0",
 	"image": "archer.png",
 	"format": "RGBA8888",
-	"size": {"w":335,"h":68},
+	"size": {"w":381,"h":68},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:a2e1322268bcf656bf033462ede5a01c:8598a6ddb333d4fb205b469f7ce89ff6:bbed60d0c37d7d583029ac290d33128a$"
+	"smartupdate": "$TexturePacker:SmartUpdate:bb1260e2ab0229c9eab5e02112327607:52b660db2448557d65e7cbbb68752495:bbed60d0c37d7d583029ac290d33128a$"
 }
 }

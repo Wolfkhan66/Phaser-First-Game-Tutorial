@@ -10,15 +10,23 @@
 },
 "attack2.png":
 {
-	"frame": {"x":44,"y":136,"w":80,"h":73},
+	"frame": {"x":45,"y":0,"w":80,"h":73},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":73},
 	"sourceSize": {"w":80,"h":73}
 },
-"damaged.png":
+"damaged1.png":
 {
-	"frame": {"x":45,"y":0,"w":55,"h":67},
+	"frame": {"x":125,"y":0,"w":55,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":55,"h":67},
+	"sourceSize": {"w":55,"h":67}
+},
+"damaged2.png":
+{
+	"frame": {"x":180,"y":0,"w":55,"h":67},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":55,"h":67},
@@ -26,7 +34,7 @@
 },
 "idle.png":
 {
-	"frame": {"x":0,"y":67,"w":53,"h":67},
+	"frame": {"x":235,"y":0,"w":53,"h":67},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":53,"h":67},
@@ -34,7 +42,7 @@
 },
 "moving1.png":
 {
-	"frame": {"x":0,"y":136,"w":44,"h":71},
+	"frame": {"x":288,"y":0,"w":44,"h":71},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":71},
@@ -42,7 +50,7 @@
 },
 "moving2.png":
 {
-	"frame": {"x":53,"y":67,"w":44,"h":69},
+	"frame": {"x":332,"y":0,"w":44,"h":69},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":69},
@@ -53,8 +61,8 @@
 	"version": "1.0",
 	"image": "warriors.png",
 	"format": "RGBA8888",
-	"size": {"w":124,"h":209},
+	"size": {"w":376,"h":73},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:66870035cf689a7c167731da8d953207:55ec6ec2298ca3cc8eb4d2084b548a57:b1c8af07fde7ed2ecd6934c885d34ada$"
+	"smartupdate": "$TexturePacker:SmartUpdate:0b9169e6d0aae8630add66178373e89b:fa8ebb7f688b5c79f564412c784c5fab:b1c8af07fde7ed2ecd6934c885d34ada$"
 }
 }

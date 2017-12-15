@@ -75,38 +75,40 @@ class CollidableGroup {
                 enemy.animations.add('attack', ['attack1.png', 'attack2.png'], 6, false);
                 enemy.animations.add('move', ['moving1.png', 'moving2.png'], 7, true);
                 enemy.animations.add('idle', ['idle.png', 'idle.png'], 2, true);
-                enemy.animations.add('damaged', ['damaged.png', 'damaged.png'], 2, false);
+                enemy.animations.add('damaged', ['damaged1.png', 'damaged2.png'], 2, false);
                 break;
             }
             case "Archer": {
                 enemy.animations.add('attack', ['attack1.png', 'attack2.png'], 6, false);
                 enemy.animations.add('move', ['moving1.png', 'moving2.png'], 7, true);
                 enemy.animations.add('idle', ['idle.png', 'idle.png'], 2, true);
-                enemy.animations.add('damaged', ['damaged.png', 'damaged.png'], 2, false);
+                enemy.animations.add('damaged', ['damaged1.png', 'damaged2.png'], 2, false);
                 break;
             }
             case "Mage": {
                 enemy.animations.add('attack', ['attack1.png', 'attack2.png'], 6, false);
                 enemy.animations.add('move', ['moving1.png', 'moving2.png'], 7, true);
                 enemy.animations.add('idle', ['idle.png', 'idle.png'], 2, true);
-                enemy.animations.add('damaged', ['idle.png', 'idle.png'], 2, false);
+                enemy.animations.add('damaged', ['damaged.png', 'idle.png'], 2, false);
                 break;
             }
             case "Mystic": {
                 enemy.animations.add('attack', ['attack1.png', 'attack2.png'], 6, false);
                 enemy.animations.add('move', ['moving1.png', 'moving2.png'], 7, true);
                 enemy.animations.add('idle', ['idle.png', 'idle.png'], 2, true);
-                enemy.animations.add('damaged', ['idle.png', 'idle.png'], 2, false);
+                enemy.animations.add('damaged', ['damaged.png', 'idle.png'], 2, false);
                 break;
             }
             case "Critter1": {
                 enemy.animations.add('move', ['Critter1/moving1.png', 'Critter1/moving2.png'], 7, true);
                 enemy.animations.add('attack', ['Critter1/moving2.png', 'Critter1/moving2.png'], 6, false);
+                enemy.animations.add('damaged', ['Critter1/damaged.png', 'Critter1/moving1.png'], 2, false);
                 break;
             }
             case "Critter2": {
                 enemy.animations.add('move', ['Critter2/moving1.png', 'Critter2/moving2.png'], 7, true);
                 enemy.animations.add('attack', ['Critter2/moving2.png', 'Critter2/moving2.png'], 6, false);
+                enemy.animations.add('damaged', ['Critter2/damaged.png', 'Critter2/moving1.png'], 2, false);
                 break;
             }
         }
@@ -147,7 +149,7 @@ class CollidableGroup {
                 break;
             }
             case "Critter1": {
-                enemy.health = 2;
+                enemy.health = 20;
                 enemy.range = game.rnd.integerInRange(20, 80);
                 enemy.speed = game.rnd.integerInRange(50, 100);
                 enemy.damage = game.rnd.integerInRange(1, 2);
@@ -155,7 +157,7 @@ class CollidableGroup {
                 break;
             }
             case "Critter2": {
-                enemy.health = 2;
+                enemy.health = 20;
                 enemy.range = game.rnd.integerInRange(20, 80);
                 enemy.speed = game.rnd.integerInRange(50, 100);
                 enemy.damage = game.rnd.integerInRange(1, 2);
