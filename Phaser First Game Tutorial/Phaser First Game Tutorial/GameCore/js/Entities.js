@@ -88,10 +88,12 @@ class CollidableGroup {
             }
             case "Critter1": {
                 enemy.animations.add('move', ['Critter1/moving1.png', 'Critter1/moving2.png'], 7, true);
+                enemy.animations.add('attack', ['Critter1/moving2.png', 'Critter1/moving2.png'], 6, false);
                 break;
             }
             case "Critter2": {
                 enemy.animations.add('move', ['Critter2/moving1.png', 'Critter2/moving2.png'], 7, true);
+                enemy.animations.add('attack', ['Critter2/moving2.png', 'Critter2/moving2.png'], 6, false);
                 break;
             }
         }
@@ -117,7 +119,7 @@ class CollidableGroup {
             }
             case "Mage": {
                 enemy.health = 15;
-                enemy.range = game.rnd.integerInRange(300, 350);
+                enemy.range = game.rnd.integerInRange(250, 300);
                 enemy.speed = game.rnd.integerInRange(30, 100);
                 enemy.damage = game.rnd.integerInRange(4, 6);
                 enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);

@@ -79,3 +79,4 @@ C:\Users\Wolf\Documents\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tuto
 C:\Users\Wolf\Documents\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\bin\Microsoft.AI.Web.xml
 C:\Users\Wolf\Documents\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\obj\Release\Phaser First Game Tutorial.dll
 C:\Users\Wolf\Documents\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\obj\Release\Phaser First Game Tutorial.pdb
+C:\Users\Wolf\Documents\GitHub\Phaser-First-Game-Tutorial\Phaser First Game Tutorial\Phaser First Game Tutorial\obj\Release\Phaser First Game Tutorial.csprojResolveAssemblyReference.cache

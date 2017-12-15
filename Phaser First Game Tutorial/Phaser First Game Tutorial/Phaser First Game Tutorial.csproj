@@ -193,6 +193,7 @@
     <Content Include="GameCore\Assets\Enemies\mage.json" />
     <Content Include="GameCore\Assets\Enemies\mystic.json" />
     <Content Include="GameCore\Assets\Enemies\warriors.json" />
+    <Content Include="GameCore\Assets\Maps\Map2.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />

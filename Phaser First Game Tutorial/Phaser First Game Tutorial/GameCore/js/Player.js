@@ -163,7 +163,7 @@
             this.sprite.jumping = true;
             this.sprite.animations.play('jump');
             this.sprite.animations.currentAnim.onComplete.add(function () { this.sprite.jumping = false; }, this);
-            this.sprite.body.velocity.y = -500;
+            this.sprite.body.velocity.y = -300;
         }
     }
 

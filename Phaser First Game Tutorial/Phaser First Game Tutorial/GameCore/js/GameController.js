@@ -126,10 +126,10 @@ function enemyPlayerCollision(player, enemy) {
     if (enemy.attacking) {
         gameWorld.player.takeDamage(enemy.damage);
         if (enemy.facingLeft) {
-            player.body.velocity.x = -200;
+            player.body.velocity.x = -100;
         }
         if (enemy.facingRight) {
-            player.body.velocity.x = 200;
+            player.body.velocity.x = 100;
         }
     }
 
@@ -137,10 +137,10 @@ function enemyPlayerCollision(player, enemy) {
         enemy.health -= player.damage;
         enemy.takingDamage = true;
         if (player.facingLeft) {
-            enemy.body.velocity.x = -200;
+            enemy.body.velocity.x = -100;
         }
         if (player.facingRight) {
-            enemy.body.velocity.x = 200;
+            enemy.body.velocity.x = 100;
         }
     }
 }

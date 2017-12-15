@@ -7,11 +7,11 @@
         this.layer = this.map.createLayer('Tile Layer 1');
         this.map.visible = false;
         this.layer.visible = false;
-        this.warriors = new CollidableGroup(10, 'warrior', meleeEnemyFactory);
-        this.archers = new CollidableGroup(10, 'archer', rangedEnemyFactory);
-        this.mages = new CollidableGroup(10, 'mage', rangedEnemyFactory);
-        this.mystics = new CollidableGroup(10, 'mystic', meleeEnemyFactory);
-        this.critters = new CollidableGroup(10, 'critters', critterEnemyFactory);
+        this.warriors = new CollidableGroup(10, 'warrior', warriorFactory);
+        this.archers = new CollidableGroup(10, 'archer', archerFactory);
+        this.mages = new CollidableGroup(10, 'mage', mageFactory);
+        this.mystics = new CollidableGroup(10, 'mystic', mysticFactory);
+        this.critters = new CollidableGroup(10, 'critters', crittersFactory);
         console.log("GameWorld Instantiated.");
     }
 
@@ -131,29 +131,57 @@
     }
 }
 
-function meleeEnemyFactory(sprite) {
+function warriorFactory(sprite) {
     sprite.entity = new Entity();
-    sprite.entity.addControl(followPlayerControl);
+    sprite.entity.addControl(followPlayerXControl);
+    sprite.entity.addControl(followPlayerYControl);
     sprite.entity.addControl(attackControl);
+    sprite.entity.addControl(chargingAttackControl);
     sprite.entity.addControl(cooldownControl);
     sprite.entity.addControl(deathControl);
     sprite.entity.addControl(takeDamageControl);
     sprite.entity.addControl(xGravityControl);
 };
 
-function rangedEnemyFactory(sprite) {
+function archerFactory(sprite) {
     sprite.entity = new Entity();
-    sprite.entity.addControl(followPlayerControl);
+    sprite.entity.addControl(followPlayerXControl);
+    sprite.entity.addControl(followPlayerYControl);
+    sprite.entity.addControl(attackControl);
+    sprite.entity.addControl(chargingAttackControl);
+    sprite.entity.addControl(cooldownControl);
+    sprite.entity.addControl(deathControl);
+    sprite.entity.addControl(takeDamageControl);
+    sprite.entity.addControl(xGravityControl);
+};
+
+function mageFactory(sprite) {
+    sprite.entity = new Entity();
+    sprite.entity.addControl(followPlayerXControl);
+    sprite.entity.addControl(followPlayerYControl);
+    sprite.entity.addControl(attackControl);
+    sprite.entity.addControl(chargingAttackControl);
+    sprite.entity.addControl(cooldownControl);
+    sprite.entity.addControl(deathControl);
+    sprite.entity.addControl(takeDamageControl);
+    sprite.entity.addControl(xGravityControl);
+};
+
+function mysticFactory(sprite) {
+    sprite.entity = new Entity();
+    sprite.entity.addControl(followPlayerXControl);
     sprite.entity.addControl(rangedAttackControl);
+    sprite.entity.addControl(chargingAttackControl);
     sprite.entity.addControl(cooldownControl);
     sprite.entity.addControl(deathControl);
     sprite.entity.addControl(takeDamageControl);
     sprite.entity.addControl(xGravityControl);
 };
 
-function critterEnemyFactory(sprite) {
+function crittersFactory(sprite) {
     sprite.entity = new Entity();
-    sprite.entity.addControl(followPlayerControl);
+    sprite.entity.addControl(followPlayerXControl);
+    sprite.entity.addControl(chargingAttackControl);
     sprite.entity.addControl(jumpAttackControl);
     sprite.entity.addControl(cooldownControl);
     sprite.entity.addControl(deathControl);
