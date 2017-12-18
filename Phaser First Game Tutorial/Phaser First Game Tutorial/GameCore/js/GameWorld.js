@@ -38,6 +38,8 @@
         this.potions.destroyGroup();
         this.projectiles.destroyGroup();
         this.paralex.forEach(sprite => sprite.kill());
+        this.map.destroy();
+        this.layer.destroy();
     }
 
     createMap(tilemap) {

@@ -72,6 +72,7 @@ class CollidableGroup {
             enemy.attacking = false;
             enemy.cooldown = false;
             enemy.inRange = false;
+            enemy.inYRange = false;
             enemy.chargingAttack = false;
             enemy.following = true;
             enemy.takingDamage = false;
