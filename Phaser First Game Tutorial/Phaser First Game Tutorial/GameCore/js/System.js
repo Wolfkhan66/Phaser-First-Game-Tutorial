@@ -47,7 +47,8 @@
         // GameOverUI \\
         this.createSprite('SplashScreen', 'GameOverUI', 0, 0, 800, 600, 'SplashScreen', null, null);
         this.createText('GameOver', 'GameOverUI', (game.width / 5), (game.height / 4), 'Game Over', 100, null);
-        this.createText('Continue?', 'GameOverUI', (game.width / 2) - 44, (game.height / 2), 'Continue?', 25, function () { sceneManager("Menu") });
+        this.createText('YourScore', 'GameOverUI', (game.width / 2) - 64, (game.height / 2), 'Your Score: ' + game.score, 25, null);
+        this.createText('Continue?', 'GameOverUI', (game.width / 2) - 44, (game.height / 2) + 40, 'Continue?', 25, function () { sceneManager("Menu") });
     }
 
     createText(Name, UI, x, y, string, size, event) {

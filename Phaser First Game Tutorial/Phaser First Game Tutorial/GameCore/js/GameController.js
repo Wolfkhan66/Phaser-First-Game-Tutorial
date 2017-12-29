@@ -129,9 +129,8 @@ function handleCollisions() {
 }
 
 function projectileCollision(player, projectile) {
-    player.health -= projectile.damage;
+    gameWorld.player.takeDamage(projectile.damage);
     projectile.kill();
-    ui.setPlayerHealth(player.health);
 }
 
 
@@ -190,7 +189,6 @@ function sceneManager(scene) {
             break;
         }
         case "GameOver": {
-            resetGame();
             ui.showUI("GameOverUI");
             break;
         }
