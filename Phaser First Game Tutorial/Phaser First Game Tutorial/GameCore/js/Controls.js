@@ -45,7 +45,7 @@ function followPlayerYControl(sprite) {
         if (gameWorld.player.sprite.y < sprite.y) {
             if (gameWorld.player.sprite.y - 10 < sprite.y) {
                 sprite.inYRange = false;
-            } 
+            }
         }
         else {
             if (gameWorld.player.sprite.y + 10 > sprite.y) {
@@ -58,10 +58,10 @@ function followPlayerYControl(sprite) {
 function xGravityControl(sprite) {
     // apply resistance on the x axis to slow down entities when they are not using a movement control
     if (sprite.body.velocity.x > 0) {
-        sprite.body.velocity.x -= 3;
+        sprite.body.velocity.x -= 10;
     }
     else if (sprite.body.velocity.x < 0) {
-        sprite.body.velocity.x += 3;
+        sprite.body.velocity.x += 10;
     }
 }
 
@@ -80,7 +80,17 @@ function chargingAttackControl(sprite) {
 function attackControl(sprite) {
     if (sprite.attacking) {
         sprite.animations.play('attack');
-        sprite.animations.currentAnim.onComplete.add(function () { sprite.attacking = false; sprite.cooldown = true; }, this);
+        sprite.animations.currentAnim.onComplete.add(function () { sprite.attacking = false; sprite.cooldown = true; sprite.soundPlaying = false; }, this);
+
+        if (!sprite.soundPlaying) {
+            sprite.soundPlaying = true;
+            if (sprite.type == "Mystic") {
+                audio.playSound("Lazer");
+            }
+            else {
+                audio.playSound("MeleeAttack");
+            }
+        }
     }
 }
 
@@ -89,12 +99,12 @@ function rangedAttackControl(sprite) {
         sprite.following = false;
         sprite.animations.play('attack');
         sprite.animations.currentAnim.onComplete.add(function () { sprite.cooldown = true; }, this);
-
+        audio.playSound("Arrow");
         if (sprite.facingLeft) {
-            gameWorld.projectiles.createArrow(sprite.x, sprite.y - 20, -350)
+            gameWorld.projectiles.createArrow(sprite.x, sprite.y - 30, -350)
         }
         else {
-            gameWorld.projectiles.createArrow(sprite.x, sprite.y - 20, 350)
+            gameWorld.projectiles.createArrow(sprite.x, sprite.y - 30, 350)
         }
         sprite.attacking = false
     }
@@ -104,6 +114,10 @@ function jumpAttackControl(sprite) {
     if (sprite.attacking) {
         sprite.following = false;
         sprite.body.velocity.y = -80;
+        if (!sprite.soundPlaying) {
+            audio.playSound("MeleeAttack");
+            sprite.soundPlaying = true;
+        }
         if (gameWorld.player.sprite.x > sprite.x) {
             sprite.body.velocity.x = +200;
         }
@@ -111,7 +125,7 @@ function jumpAttackControl(sprite) {
             sprite.body.velocity.x = -200;
         }
         sprite.animations.play('attack');
-        sprite.animations.currentAnim.onComplete.add(function () { sprite.attacking = false; sprite.cooldown = true; }, this);
+        sprite.animations.currentAnim.onComplete.add(function () { sprite.attacking = false; sprite.cooldown = true; sprite.soundPlaying = false; }, this);
     }
 }
 
@@ -146,7 +160,7 @@ function deathControl(sprite) {
         if (game.gameMode == "TimeAttack") {
             game.countDown = game.countDown + 2;
         }
-        var potionSpawnChance = game.rnd.integerInRange(1, 20);
+        var potionSpawnChance = game.rnd.integerInRange(1, 10);
         if (potionSpawnChance == 10) {
             gameWorld.potions.createPotion(sprite.x, sprite.y, 300)
         }

@@ -61,6 +61,7 @@ class CollidableGroup {
         // get the first sprite in the group that is not in use
         const enemy = this.group.getFirstExists(false);
         if (enemy) {
+            enemy.type = Type;
             enemy.body.collideWorldBounds = true;
             enemy.reset(x, y);
             enemy.body.gravity.y = 500;
@@ -76,6 +77,7 @@ class CollidableGroup {
             enemy.chargingAttack = false;
             enemy.following = true;
             enemy.takingDamage = false;
+            enemy.playingSound = false;
             enemy.playerYTimer = game.time.create(false);
             this.setAnimations(enemy, Type);
             this.setStats(enemy, Type);
@@ -132,7 +134,7 @@ class CollidableGroup {
             case "Warrior": {
                 enemy.health = 50 * game.difficultyLevel;
                 enemy.range = game.rnd.integerInRange(60, 80);
-                enemy.speed = game.rnd.integerInRange(50, 100);
+                enemy.speed = game.rnd.integerInRange(200, 280);
                 enemy.damage = game.rnd.integerInRange(5, 10) * game.difficultyLevel;
                 enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
                 break;
@@ -140,7 +142,7 @@ class CollidableGroup {
             case "Archer": {
                 enemy.health = 25 * game.difficultyLevel;
                 enemy.range = game.rnd.integerInRange(300, 350);
-                enemy.speed = game.rnd.integerInRange(30, 100);
+                enemy.speed = game.rnd.integerInRange(200, 280);
                 enemy.damage = game.rnd.integerInRange(2, 4) * game.difficultyLevel;
                 enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
                 break;
@@ -148,15 +150,15 @@ class CollidableGroup {
             case "Mage": {
                 enemy.health = 15 * game.difficultyLevel;
                 enemy.range = game.rnd.integerInRange(250, 300);
-                enemy.speed = game.rnd.integerInRange(30, 100);
+                enemy.speed = game.rnd.integerInRange(200, 280);
                 enemy.damage = game.rnd.integerInRange(4, 6) * game.difficultyLevel;
                 enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
                 break;
             }
             case "Mystic": {
                 enemy.health = 100 * game.difficultyLevel;
-                enemy.range = game.rnd.integerInRange(20, 80);
-                enemy.speed = game.rnd.integerInRange(30, 100);
+                enemy.range = 100;
+                enemy.speed = game.rnd.integerInRange(200, 280);
                 enemy.damage = game.rnd.integerInRange(4, 6) * game.difficultyLevel;
                 enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
                 break;
@@ -164,7 +166,7 @@ class CollidableGroup {
             case "Critter1": {
                 enemy.health = 20 * game.difficultyLevel;
                 enemy.range = game.rnd.integerInRange(20, 80);
-                enemy.speed = game.rnd.integerInRange(50, 100);
+                enemy.speed = game.rnd.integerInRange(200, 300);
                 enemy.damage = game.rnd.integerInRange(1, 2) * game.difficultyLevel;
                 enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
                 break;
@@ -172,7 +174,7 @@ class CollidableGroup {
             case "Critter2": {
                 enemy.health = 20 * game.difficultyLevel;
                 enemy.range = game.rnd.integerInRange(20, 80);
-                enemy.speed = game.rnd.integerInRange(50, 100);
+                enemy.speed = game.rnd.integerInRange(200, 300);
                 enemy.damage = game.rnd.integerInRange(1, 2) * game.difficultyLevel;
                 enemy.reactionTime = (game.rnd.integerInRange(7, 10) / 10);
                 break;

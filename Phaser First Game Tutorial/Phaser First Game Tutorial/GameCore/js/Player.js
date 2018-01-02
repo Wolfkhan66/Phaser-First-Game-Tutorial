@@ -5,10 +5,10 @@
         const playerSprite = game.add.sprite(0, 0, 'player', 'idle.png');
         game.physics.arcade.enable(playerSprite);
         playerSprite.anchor.setTo(0.5, 0.5);
-        playerSprite.body.gravity.y = 600;
+        playerSprite.body.gravity.y = 1000;
         playerSprite.body.collideWorldBounds = true;
         playerSprite.animations.add('idle', ['idle.png', 'idle.png'], 5, true);
-        playerSprite.animations.add('jump', ['jump.png', 'idle.png'], 1.5, false);
+        playerSprite.animations.add('jump', ['jump.png'], 1, false);
         playerSprite.animations.add('run', ['running1.png', 'running2.png', 'running3.png', 'running4.png'], 7, true);
         playerSprite.animations.add('attack1', ['attack1.png', 'attack2.png'], 6, false);
         playerSprite.animations.add('attack2', ['attack3.png', 'attack4.png'], 6, false);
@@ -26,6 +26,7 @@
         playerSprite.visible = false;
         playerSprite.leftButton = false;
         playerSprite.rightButton = false;
+        playerSprite.movementSpeed = 300;
 
         this.sprite = playerSprite;
 
@@ -85,6 +86,7 @@
 
     death() {
         sceneManager("GameOver");
+        ui.setText("YourScore", "Your Score: " + game.score);
     }
 
     takeDamage(damage) {
@@ -103,7 +105,7 @@
     }
 
     moveLeft() {
-        this.sprite.body.velocity.x = -150;
+        this.sprite.body.velocity.x = -this.sprite.movementSpeed;
         if (!this.sprite.jumping) {
             this.sprite.animations.play('run');
         }
@@ -113,7 +115,7 @@
     }
 
     moveRight() {
-        this.sprite.body.velocity.x = 150;
+        this.sprite.body.velocity.x = this.sprite.movementSpeed;
         if (!this.sprite.jumping) {
             this.sprite.animations.play('run');
         }
@@ -123,11 +125,11 @@
 
     attack() {
         if (!this.sprite.attacking && !this.sprite.takingDamage) {
+            audio.playSound("MeleeAttack");
             this.sprite.attackCounterTimer.stop();
             this.sprite.jumping = false;
             this.sprite.attacking = true;
             this.sprite.body.velocity.y = -50;
-
             if (this.sprite.facingLeft) {
                 this.sprite.body.velocity.x = -200;
             }
@@ -163,7 +165,7 @@
             this.sprite.jumping = true;
             this.sprite.animations.play('jump');
             this.sprite.animations.currentAnim.onComplete.add(function () { this.sprite.jumping = false; }, this);
-            this.sprite.body.velocity.y = -400;
+            this.sprite.body.velocity.y = -550;
         }
     }
 

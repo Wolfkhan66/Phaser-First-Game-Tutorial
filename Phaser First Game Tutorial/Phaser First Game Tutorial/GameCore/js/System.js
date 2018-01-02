@@ -1,4 +1,34 @@
-﻿class UI {
+﻿class Audio {
+    constructor() {
+        console.log("Building Audio")
+        this.sounds = [];
+
+        this.createSound("BackgroundMusic", 0.1, true);
+        this.createSound("MainMenuMusic", 1, true);
+        this.createSound("Heal", 1, false);
+        this.createSound("Arrow", 1, false);
+        this.createSound("Laser", 1, false);
+        this.createSound("MeleeAttack", 1, false);
+    }
+
+    createSound(Name, Volume, Loop) {
+        this.sounds.push({ Name: Name, SoundEffect: game.add.audio(Name, Volume, Loop) });
+    }
+
+    playSound(Name) {
+        this.sounds.forEach(function (object) { if (object.Name == Name) { object.SoundEffect.play(); } });
+    }
+
+    stopSound(Name) {
+        this.sounds.forEach(function (object) { if (object.Name == Name) { object.SoundEffect.stop(); } });
+    }
+
+    stopAllSounds() {
+        this.sounds.forEach(object => object.SoundEffect.stop());
+    }
+}
+
+class UI {
     constructor() {
         console.log("Constructing UI Elements")
         this.textObjects = [];
@@ -47,7 +77,7 @@
         // GameOverUI \\
         this.createSprite('SplashScreen', 'GameOverUI', 0, 0, 800, 600, 'SplashScreen', null, null);
         this.createText('GameOver', 'GameOverUI', (game.width / 5), (game.height / 4), 'Game Over', 100, null);
-        this.createText('YourScore', 'GameOverUI', (game.width / 2) - 64, (game.height / 2), 'Your Score: ' + game.score, 25, null);
+        this.createText('YourScore', 'GameOverUI', (game.width / 2) - 64, (game.height / 2), 'Your Score: ', 25, null);
         this.createText('Continue?', 'GameOverUI', (game.width / 2) - 44, (game.height / 2) + 40, 'Continue?', 25, function () { sceneManager("Menu") });
     }
 
@@ -97,17 +127,11 @@
     }
 
     setTextPosition(name, x, y) {
-        this.textObjects.forEach(function (object) { if (object.Name == name) {object.Text.cameraOffset.setTo(x, y); } });
+        this.textObjects.forEach(function (object) { if (object.Name == name) { object.Text.cameraOffset.setTo(x, y); } });
     }
 
     setPlayerHealth(health) {
         this.sprites.forEach(function (object) { if (object.Name == "HealthBar") { object.Sprite.width = health; } });
     }
 
-}
-
-class Audio {
-    constructor() {
-        console.log("Audio Instantiated.")
-    }
 }

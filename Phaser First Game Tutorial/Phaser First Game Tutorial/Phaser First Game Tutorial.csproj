@@ -149,6 +149,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GameCore\Assets\Audio\Arrow.wav" />
+    <Content Include="GameCore\Assets\Audio\BackgroundMusic.mp3" />
+    <Content Include="GameCore\Assets\Audio\Heal.wav" />
+    <Content Include="GameCore\Assets\Audio\Laser.wav" />
+    <Content Include="GameCore\Assets\Audio\MeleeAttack.wav" />
+    <Content Include="GameCore\Assets\Audio\MenuMusic.mp3" />
     <Content Include="GameCore\Assets\Backgrounds\Paralex1.png" />
     <Content Include="GameCore\Assets\Backgrounds\Paralex2.png" />
     <Content Include="GameCore\Assets\Backgrounds\Paralex3.png" />

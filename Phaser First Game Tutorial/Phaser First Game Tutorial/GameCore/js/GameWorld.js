@@ -188,8 +188,8 @@ function mageFactory(sprite) {
 function mysticFactory(sprite) {
     sprite.entity = new Entity();
     sprite.entity.addControl(followPlayerXControl);
-    sprite.entity.addControl(rangedAttackControl);
     sprite.entity.addControl(chargingAttackControl);
+    sprite.entity.addControl(attackControl);
     sprite.entity.addControl(cooldownControl);
     sprite.entity.addControl(deathControl);
     sprite.entity.addControl(takeDamageControl);

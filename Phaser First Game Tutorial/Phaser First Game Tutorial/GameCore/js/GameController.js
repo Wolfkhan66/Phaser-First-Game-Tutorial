@@ -47,7 +47,12 @@ function preload() {
     game.load.image('jungle tileset', '../GameCore/Assets/Maps/jungle tileset.png');
     game.load.image('healthPotion', '../GameCore/Assets/Collectibles/health.png');
     game.load.image('arrow', '../GameCore/Assets/Projectiles/arrow.png');
-
+    game.load.audio('BackgroundMusic', '../GameCore/Assets/Audio/BackgroundMusic.mp3');
+    game.load.audio('MainMenuMusic', '../GameCore/Assets/Audio/MenuMusic.mp3');
+    game.load.audio('Heal', '../GameCore/Assets/Audio/Heal.wav');
+    game.load.audio('Arrow', '../GameCore/Assets/Audio/Arrow.wav');
+    game.load.audio('Laser', '../GameCore/Assets/Audio/Laser.wav');
+    game.load.audio('MeleeAttack', '../GameCore/Assets/Audio/MeleeAttack.wav');
     console.log("Assets Loaded.");
 }
 
@@ -93,6 +98,7 @@ function update() {
 }
 
 function resetGame() {
+    console.log("Reseting game variables");
     gameWorld.player.resetPlayer();
     game.score = 0;
     ui.setText("Score", "Score: " + game.score);
@@ -106,6 +112,7 @@ function resetGame() {
     game.cameraMovingRight = false;
     game.cameraLastX = 0;
     game.countDown = 60;
+    audio.stopAllSounds();
 }
 
 function handleCollisions() {
@@ -140,6 +147,7 @@ function potionCollision(player, potion) {
         player.health += 10;
         if (player.health > 100) { player.health = 100; }
         ui.setPlayerHealth(player.health);
+        audio.playSound("Heal");
     }
 }
 
@@ -173,6 +181,7 @@ function sceneManager(scene) {
     switch (scene) {
         case "Menu": {
             resetGame();
+            audio.playSound("MainMenuMusic");
             ui.showUI("MainMenuUI");
             break;
         }
@@ -193,6 +202,8 @@ function sceneManager(scene) {
             break;
         }
         case "Map1": {
+            audio.stopSound("MainMenuMusic");
+            audio.playSound("BackgroundMusic");
             ui.showUI("InGameUI");
             gameWorld.player.sprite.visible = true;
             gameWorld.player.setPlayerPosition(1200, game.height / 2);
@@ -200,6 +211,8 @@ function sceneManager(scene) {
             break;
         }
         case "Map2": {
+            audio.stopSound("MainMenuMusic");
+            audio.playSound("BackgroundMusic");
             ui.showUI("InGameUI");
             gameWorld.player.sprite.visible = true;
             gameWorld.player.setPlayerPosition(1200, game.height / 2);
